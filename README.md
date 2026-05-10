@@ -13,6 +13,9 @@
   <br><br>
 </div>
 
+> **🗣️ Supported Languages / 対応言語:** English, Japanese, Chinese, Korean, and Thai.
+> **🔒 Privacy & Security:** Your Gemini API Key is saved locally on your PC (`config.json`). The app strictly communicates only with Google's official API and VRChat via local OSC. We do not collect or store your keys or voice data. (APIキーや音声データが収集・保存されることはありません)
+
 ---
 
 ### 📝 Documentation / マニュアル
@@ -59,7 +62,9 @@ The Gemini API offers two tiers: "Free" and "Pay-as-you-go".
 
 ### 4️⃣ Launching the App
 * Open your extracted folder and double-click `VRC DUAL EZ Translator.exe`.
-* **⚠️ IMPORTANT: First Startup Note**
+* Select your preferred language from the top right settings.
+
+**⚠️ IMPORTANT: First Startup Note**
 When you launch the app for the first time, a black console window will appear and seem to freeze. This is because it is downloading a **1.5GB AI model** to your PC. **Absolutely DO NOT close the black screen**; wait until the main screen appears. (Subsequent startups will be instant).
 </details>
 
@@ -101,7 +106,9 @@ APIの制限を解除して有料枠を使うための手順だよ。
 
 ### 4️⃣ アプリの起動
 * 解凍したフォルダの中にある `VRC DUAL EZ Translator.exe` をダブルクリックして起動します。
-* **⚠️ 初回起動時の重要な注意 (必ず読んでね)**
+* 起動後、右上の言語設定から「日本語」を選んでね。
+
+**⚠️ 初回起動時の重要な注意 (必ず読んでね)**
 初めて起動する時、黒い画面(コンソール)のまましばらくフリーズしたようになります。これは**1.5GBのAIモデル**をPCにダウンロードしているためです。**絶対に黒い画面を閉じずに**、メイン画面が表示されるまで待ってください。(2回目以降はすぐに起動します)
 </details>
 
@@ -140,7 +147,7 @@ If you prefer typing over speaking, use the **Manual Translate** box:
 
 ### 🎧 Audio Routing Note (For Incoming System)
 To translate other players, the app needs to "hear" your game audio. **You cannot simply select your "Speakers/Headphones" directly in the app.**
-* You must use an audio routing method like Windows' built-in **Stereo Mix**, or a Virtual Audio Cable (e.g., VB-Cable, Voicemeeter) to route the game's output into a readable "Input" for the translator.
+* You must use an audio routing method like Windows' built-in **Stereo Mix**, or a Virtual Audio Cable (e.g., VB-Cable, Voicemeeter, Wave Link) to route the game's output into a readable "Input" for the translator.
 
 ### ⚠️ Known Limitations
 * **Translation Speed & Bugs:** Translation relies on cloud APIs. You may experience delays, or the app might occasionally skip a sentence if the API rate limit is reached or the network drops.
@@ -178,11 +185,37 @@ To translate other players, the app needs to "hear" your game audio. **You canno
 
 ### 🎧 音声ルーティングについて (受信システム用)
 他人の声を翻訳するには、ゲーム音声をアプリに「聴かせる」必要があります。**通常の「スピーカー」や「ヘッドフォン」を直接選択することはできません。**
-* Windows標準の**「ステレオミキサー (Stereo Mix)」**を使用するか、仮想オーディオケーブル (VB-Cable, Voicemeeterなど) を使って、デスクトップ音声をマイク入力としてルーティング（迂回）させる必要があります。
+* Windows標準の**「ステレオミキサー (Stereo Mix)」**を使用するか、仮想オーディオケーブル (VB-Cable, Voicemeeter, Wave Linkなど) を使って、デスクトップ音声をマイク入力としてルーティング（迂回）させる必要があります。
 
 ### ⚠️ 仕様と制限事項
 * **翻訳の遅延とバグ:** クラウドAPIを使用しているため、通信状況やAPIの制限により翻訳が遅延したり、一時的に文章がスキップされたりすることがあります。
 * **AIの音声認識の限界 (精度について):** Whisper AIは非常に優秀ですが、複数の人が同時に話したり、ゲームのBGMが大きかったり、スラングが多い場合、AIが言葉を聞き間違えたり、幻覚（存在しない言葉を生成）を起こすことがあります。完璧な字幕を求めるのではなく、会話の「ニュアンスを掴む」目的でご活用ください。
+</details>
+
+---
+
+## ❓ FAQ & Troubleshooting
+
+<details>
+<summary><b>🇺🇸 [EN] English FAQ</b></summary>
+
+* **Q: Why isn't the app typing in VRChat?**
+  * A: Ensure you have enabled OSC in VRChat's radial menu. Also, check if your Windows Firewall or Antivirus is blocking Port 9000.
+* **Q: The translation is slow, pausing, or suddenly stops working.**
+  * A: If you are using the Gemini Free Tier, you might have hit the rate limit (too many requests per minute). Please wait a moment or upgrade to Pay-as-you-go for an uninterrupted experience.
+* **Q: The app crashes immediately upon clicking Start.**
+  * A: Make sure you have installed the NVIDIA CUDA Toolkit. If you just installed it, **you MUST restart your PC** before running the app.
+</details>
+
+<details>
+<summary><b>🇯🇵 [JP] 日本語 FAQ</b></summary>
+
+* **Q: VRChatに文字が入力されません。**
+  * A: VRChatのリングメニューでOSCが有効になっているか確認してください。また、Windowsファイアウォールやセキュリティソフトがポート9000をブロックしていないか確認してください。
+* **Q: 翻訳が遅い、途切れる、または突然動かなくなりました。**
+  * A: 無料枠（Free Tier）をご利用の場合、制限（レートリミット）に達した可能性があります。少し待つか、スムーズに利用するために有料枠（Pay-as-you-go）への切り替えをご検討ください。
+* **Q: Startボタンを押すとアプリがクラッシュ（強制終了）します。**
+  * A: NVIDIA CUDA Toolkitがインストールされているか確認してください。インストール直後の場合は、アプリを起動する前に**必ずPCを再起動**してください。
 </details>
 
 ---
