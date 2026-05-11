@@ -17,3 +17,5 @@ output/
 
 # Ignore node_modules in website (just in case)
 website/node_modules/
+
+config.json
