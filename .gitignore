@@ -1,0 +1,19 @@
+# Environments
+.venv/
+__pycache__/
+
+# Build and Output Folders
+build/
+dist/
+output/
+
+# Executables and Archives
+*.exe
+*.zip
+*.spec
+
+# IDE Settings
+.vscode/
+
+# Ignore node_modules in website (just in case)
+website/node_modules/

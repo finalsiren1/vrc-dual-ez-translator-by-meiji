@@ -1,0 +1,7 @@
+SpeechRecognition
+python-osc
+faster-whisper
+google-genai
+numpy
+keyboard
+customtkinter
