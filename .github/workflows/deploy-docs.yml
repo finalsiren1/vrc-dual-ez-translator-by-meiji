@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'website/**' # สั่งให้ทำงานเฉพาะตอนคุณแก้ไฟล์ในโฟลเดอร์ website เท่านั้น
 
 permissions:
   contents: read
@@ -15,21 +13,29 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./website
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: npm
-          cache-dependency-path: ./website/package-lock.json
-      - run: npm ci
-      - run: npm run build
-      - uses: actions/upload-pages-artifact@v3
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: './website/package-lock.json'
+
+      - name: Install dependencies
+        working-directory: ./website
+        run: npm install
+
+      - name: Build Docusaurus
+        working-directory: ./website
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: website/build
+          path: './website/build'
 
   deploy:
     environment:
