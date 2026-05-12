@@ -24,7 +24,7 @@ SyncVRC can utilize your GPU for high-speed voice recognition (Faster-Whisper). 
 
 * **For NVIDIA Users**: To achieve maximum performance, download and install the [NVIDIA CUDA Toolkit 12.x](https://developer.nvidia.com/cuda-12-9-1-download-archive). **Note:** You must restart your PC after installation.
 * **For AMD/Intel or No GPU Users**: You do not need to install CUDA. The application will automatically fall back to using your CPU.
-* **Changing the Device**: You can always switch between GPU and CPU processing manually in the [**Settings > AI Processing Device**](./settings-placeholder).
+* **Changing the Device**: You can always switch between GPU and CPU processing manually in the [**Settings > AI Processing Device**](#).
 
 ## 3. Enable VRChat OSC
 

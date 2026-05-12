@@ -25,4 +25,4 @@ SyncVRC is a real-time voice translation tool designed specifically for VRChat. 
 
 ### How to Install
 
-Please refer to the [Installation Guide](./installation) for detailed instructions on how to download, install, and properly run SyncVRC on your system.
+Please refer to the [Installation Guide](./tutorial/installation) for detailed instructions on how to download, install, and properly run SyncVRC on your system.
