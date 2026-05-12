@@ -1,0 +1,54 @@
+---
+title: AI 및 번역 엔진
+sidebar_label: AI 및 엔진
+sidebar_position: 2
+---
+
+# AI 및 번역 엔진 구성
+
+**AI & Translation Engine (AI 및 번역 엔진)** 섹션은 SyncVRC의 핵심입니다. 텍스트를 번역하는 클라우드 서비스와 음성을 처리하는 로컬 하드웨어를 구성하는 곳입니다.
+
+여기의 설정이 잘못되면 API 오류나 성능 저하가 발생할 수 있으므로 이 가이드를 주의 깊게 따르십시오.
+
+## 번역 엔진
+
+텍스트 번역을 처리할 클라우드 AI 제공업체를 선택합니다.
+
+* **지원되는 엔진:** Google Gemini, DeepL API 및 OpenAI.
+* **권장 사항:** **Google Gemini**를 강력히 권장하며 현재 SyncVRC에 완벽하게 최적화되어 믿을 수 없을 정도로 빠른 실시간 응답과 뛰어난 대화 컨텍스트를 제공합니다.
+
+> 🖼️ **[IMAGE PLACEHOLDER: Translation Engine Selection]** *(준비가 되면 이 줄을 다음과 같이 교체하십시오: `![Translation Engine](/img/settings-engine.png)`)*
+
+---
+
+## API 키 관리
+
+클라우드 번역 서비스를 사용하려면 선택한 제공업체의 자체 API 키를 제공해야 합니다.
+
+* **설정 방법:**
+  1. 드롭다운에서 선호하는 엔진을 선택합니다.
+  2. 비밀 API 키를 **API Key** 입력 필드에 붙여넣습니다.
+  3. **Save (저장)**를 클릭합니다.
+* **개인 정보 보호 및 스트리머 모드:** 저장되면 텍스트 필드가 잠기고 키가 별표(`********`)로 숨겨집니다. 이렇게 하면 방송이나 화면 공유 중에 실수로 API 키가 유출되는 것을 방지할 수 있습니다.
+* **편집 방법:** **Edit (편집)** 버튼을 클릭하여 필드 잠금을 해제하고 새 키를 입력한 다음 다시 저장을 클릭합니다.
+
+> 🖼️ **[IMAGE PLACEHOLDER: API Key Input and Save]** *(준비가 되면 이 줄을 다음과 같이 교체하십시오: `![API Key Setup](/img/settings-apikey.png)`)*
+
+---
+
+## AI 처리 장치 (음성 텍스트 변환)
+
+이 설정은 오프라인 **Faster-Whisper** 음성 인식 모델을 실행하는 컴퓨터의 하드웨어 구성 요소를 결정합니다.
+
+* **GPU (NVIDIA) - 강력히 권장:** 매우 빠르고 거의 즉각적인 음성 인식을 위해 그래픽 카드를 활용합니다.
+  * *요구 사항:* NVIDIA 그래픽 카드가 있고 [NVIDIA CUDA Toolkit 12.x](./../tutorial/initial-setup)가 설치되어 **있어야** 합니다.
+* **CPU (대체):** 컴퓨터의 메인 프로세서를 활용합니다.
+  * *사용 시기:* AMD 또는 Intel GPU가 있거나 시작 시 CUDA 오류가 발생하는 경우 이 옵션을 선택합니다. CPU 처리는 GPU 처리보다 눈에 띄게 느립니다.
+
+> 🖼️ **[IMAGE PLACEHOLDER: AI Processing Device Selection]** *(준비가 되면 이 줄을 다음과 같이 교체하십시오: `![AI Device](/img/settings-device.png)`)*
+
+---
+
+## 고정 모델 정보
+
+**ℹ️ 정확도에 대한 참고 사항:** 번역 속도와 인식 정확도 사이의 최상의 균형을 위해 SyncVRC는 로컬에서 **Whisper 'Medium'** 모델을 사용하도록 하드코딩되어 있습니다. 이를 통해 텍스트를 클라우드로 보내기 전에 AI가 사용자의 발음을 정확하게 이해하고 수동으로 변경할 수 없도록 합니다.

@@ -24,7 +24,7 @@ SyncVRC can utilize your GPU for high-speed voice recognition (Faster-Whisper). 
 
 * **For NVIDIA Users**: To achieve maximum performance, download and install the [NVIDIA CUDA Toolkit 12.x](https://developer.nvidia.com/cuda-12-9-1-download-archive). **Note:** You must restart your PC after installation.
 * **For AMD/Intel or No GPU Users**: You do not need to install CUDA. The application will automatically fall back to using your CPU.
-* **Changing the Device**: You can always switch between GPU and CPU processing manually in the [**Settings > AI Processing Device**](#).
+* **Changing the Device**: You can always switch between GPU and CPU processing manually in the [**Settings > AI & Translation Engine**](../settings/api-engine).
 
 ## 3. Enable VRChat OSC
 
@@ -33,6 +33,10 @@ The app communicates with VRChat via the OSC protocol to type in the chatbox and
 1.  Launch VRChat and open your **Radial Menu**.
 2.  Navigate to **Options > OSC**.
 3.  Set OSC to **Enabled**.
+
+**Checking OSC Status:** Once enabled and VRChat is running, check the bottom left of your SyncVRC sidebar. The **OSC Status** indicator should update to **🟢 Detected** to confirm a successful connection.
+
+> 🖼️ **[IMAGE PLACEHOLDER: OSC Status]** *(When ready, replace this line with: `![OSC Status](/img/setup-osc.png)`)*
 
 ## 4. Audio Device Configuration
 
