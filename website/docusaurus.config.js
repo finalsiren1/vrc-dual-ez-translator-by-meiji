@@ -39,7 +39,13 @@ const config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'ja', 'zh', 'ko'],
+    localeConfigs: {
+      en: { label: 'English' },
+      ja: { label: '日本語' },
+      zh: { label: '中文' },
+      ko: { label: '한국어' },
+    },
   },
 
   presets: [
@@ -58,6 +64,18 @@ const config = {
         ],
       ],
 
+      // วางต่อจาก block presets
+  themes: [
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        hashed: true,
+        language: ["en", "zh"],
+        docsRouteBasePath: "/", 
+      },
+    ],
+  ],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -73,17 +91,27 @@ const config = {
           src: 'img/Designer (2).png',
         },
         items: [
+          // 1. Dropdown Supporters
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Tutorial',
-          },
-          {to: '/blog', label: 'Blog', position: 'left'},
-          {
-            href: 'https://github.com/facebook/docusaurus',
-            label: 'GitHub',
+            type: 'dropdown',
+            label: 'Supporter Me 🧡',
             position: 'right',
+            items: [
+              { label: '☕ Ko-fi', href: 'https://ko-fi.com/meijivrc' },
+              { label: '🧡 Patreon', href: 'https://www.patreon.com/meijino' },
+            ],
+          },
+          // 2. ปุ่มเปลี่ยนภาษา
+          {
+            type: 'localeDropdown',
+            position: 'right',
+          },
+          // 3. ไอคอน GitHub
+          {
+            href: 'https://github.com/finalsiren1/SyncVRC',
+            position: 'right',
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository',
           },
         ],
       },
@@ -91,16 +119,7 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Tutorial',
-                to: '/docs/intro',
-              },
-            ],
-          },
-          {
-            title: 'Community & Support Me',
+            title: 'Support Me',
             items: [
               {
                 label: '☕ Buy me a Ko-fi',
@@ -110,6 +129,11 @@ const config = {
                 label: '🧡 Patreon',
                 href: 'https://www.patreon.com/meijino',
               },
+            ],
+          },
+          {
+            title: 'Community & Support Me',
+            items: [
               {
                 label: 'Discord',
                 href: 'https://discord.gg/myWuZDgVBp',
@@ -124,7 +148,7 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'GitHub',
+                label: 'SyncVRC GitHub',
                 href: 'https://github.com/finalsiren1/SyncVRC',
               },
             ],
