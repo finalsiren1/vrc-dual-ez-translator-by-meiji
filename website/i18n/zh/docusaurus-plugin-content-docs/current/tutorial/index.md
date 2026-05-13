@@ -1,11 +1,11 @@
 ---
 slug: /
-title: 教程
-sidebar_label: 教程
+title: 翻译主页
+sidebar_label: 翻译主页
 sidebar_position: 1
 ---
 
-# 欢迎使用 SyncVRC
+# 翻译主页
 
 本文档将引导您了解 SyncVRC 的基本功能、安装和设置。请按照以下步骤开始。
 

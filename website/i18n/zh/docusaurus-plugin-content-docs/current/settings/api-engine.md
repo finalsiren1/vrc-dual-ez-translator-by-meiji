@@ -1,10 +1,10 @@
 ---
-title: AI 与翻译引擎
-sidebar_label: AI 与引擎
+title: AI & 翻译引擎配置
+sidebar_label: AI & 翻译引擎配置
 sidebar_position: 2
 ---
 
-# AI 与翻译引擎配置
+# AI & 翻译引擎配置
 
 **AI & Translation Engine (AI 与翻译引擎)** 部分是 SyncVRC 的核心。您可以在此处配置翻译文本的云服务以及处理您声音的本地硬件。
 
@@ -17,7 +17,12 @@ sidebar_position: 2
 * **支持的引擎:** Google Gemini、DeepL API 和 OpenAI。
 * **建议:** 强烈推荐 **Google Gemini**，并且目前针对 SyncVRC 进行了全面优化，提供令人难以置信的快速实时响应和出色的对话上下文。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Translation Engine Selection]** *(准备就绪后，将此行替换为：`![Translation Engine](/img/settings-engine.png)`)*
+<img 
+  src={require('./img/settings-engine.jpg').default} 
+  width="900" 
+  alt="Settings Engine" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -32,7 +37,12 @@ sidebar_position: 2
 * **隐私与主播模式:** 保存后，文本字段将被锁定，您的密钥将被隐藏为星号 (`********`)。这可以防止您在直播或屏幕共享时意外泄露您的 API 密钥。
 * **如何编辑:** 点击 **Edit (编辑)** 按钮解锁该字段，输入您的新密钥，然后再次点击保存。
 
-> 🖼️ **[IMAGE PLACEHOLDER: API Key Input and Save]** *(准备就绪后，将此行替换为：`![API Key Setup](/img/settings-apikey.png)`)*
+<img 
+  src={require('./img/settings-apikey.jpg').default} 
+  width="900" 
+  alt="Settings API Key" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -45,7 +55,12 @@ sidebar_position: 2
 * **CPU (回退):** 利用您计算机的主处理器。
   * *何时使用:* 如果您拥有 AMD 或 Intel GPU，或者如果在启动时遇到 CUDA 错误，请选择此项。请注意，CPU 处理明显慢于 GPU 处理。
 
-> 🖼️ **[IMAGE PLACEHOLDER: AI Processing Device Selection]** *(准备就绪后，将此行替换为：`![AI Device](/img/settings-device.png)`)*
+<img 
+  src={require('./img/settings-device.jpg').default} 
+  width="900" 
+  alt="Settings Device" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 

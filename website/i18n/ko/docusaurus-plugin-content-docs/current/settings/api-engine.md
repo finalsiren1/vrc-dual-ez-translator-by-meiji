@@ -1,6 +1,6 @@
 ---
-title: AI 및 번역 엔진
-sidebar_label: AI 및 엔진
+title: AI 및 번역 엔진 구성
+sidebar_label: AI 및 번역 엔진 구성
 sidebar_position: 2
 ---
 
@@ -17,7 +17,12 @@ sidebar_position: 2
 * **지원되는 엔진:** Google Gemini, DeepL API 및 OpenAI.
 * **권장 사항:** **Google Gemini**를 강력히 권장하며 현재 SyncVRC에 완벽하게 최적화되어 믿을 수 없을 정도로 빠른 실시간 응답과 뛰어난 대화 컨텍스트를 제공합니다.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Translation Engine Selection]** *(준비가 되면 이 줄을 다음과 같이 교체하십시오: `![Translation Engine](/img/settings-engine.png)`)*
+<img 
+  src={require('./img/settings-engine.jpg').default} 
+  width="900" 
+  alt="Settings Engine" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -32,7 +37,12 @@ sidebar_position: 2
 * **개인 정보 보호 및 스트리머 모드:** 저장되면 텍스트 필드가 잠기고 키가 별표(`********`)로 숨겨집니다. 이렇게 하면 방송이나 화면 공유 중에 실수로 API 키가 유출되는 것을 방지할 수 있습니다.
 * **편집 방법:** **Edit (편집)** 버튼을 클릭하여 필드 잠금을 해제하고 새 키를 입력한 다음 다시 저장을 클릭합니다.
 
-> 🖼️ **[IMAGE PLACEHOLDER: API Key Input and Save]** *(준비가 되면 이 줄을 다음과 같이 교체하십시오: `![API Key Setup](/img/settings-apikey.png)`)*
+<img 
+  src={require('./img/settings-apikey.jpg').default} 
+  width="900" 
+  alt="Settings API Key" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -45,7 +55,12 @@ sidebar_position: 2
 * **CPU (대체):** 컴퓨터의 메인 프로세서를 활용합니다.
   * *사용 시기:* AMD 또는 Intel GPU가 있거나 시작 시 CUDA 오류가 발생하는 경우 이 옵션을 선택합니다. CPU 처리는 GPU 처리보다 눈에 띄게 느립니다.
 
-> 🖼️ **[IMAGE PLACEHOLDER: AI Processing Device Selection]** *(준비가 되면 이 줄을 다음과 같이 교체하십시오: `![AI Device](/img/settings-device.png)`)*
+<img 
+  src={require('./img/settings-device.jpg').default} 
+  width="900" 
+  alt="Settings Device" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 

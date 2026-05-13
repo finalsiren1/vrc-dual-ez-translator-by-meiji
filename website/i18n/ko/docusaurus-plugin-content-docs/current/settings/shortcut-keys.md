@@ -1,10 +1,10 @@
 ---
-title: 단축키 (핫키)
-sidebar_label: 단축키
+title: 단축키 설정
+sidebar_label: 단축키 설정
 sidebar_position: 3
 ---
 
-# 단축키 (핫키)
+# 단축키 설정
 
 SyncVRC는 **전역 단축키(Global Hotkeys)**를 지원합니다. 즉, Alt-Tab으로 VRChat을 벗어나거나 애플리케이션 창을 맨 앞으로 가져올 필요 없이 번역 시스템을 제어할 수 있습니다.
 
@@ -25,7 +25,12 @@ SyncVRC는 **전역 단축키(Global Hotkeys)**를 지원합니다. 즉, Alt-Tab
 * **중요 요구 사항:** 이 단축키는 번역(Translation) 탭에서 **Push to Record** 모드를 선택했고 내 음성 번역(Outgoing) 시스템이 활발하게 실행 중인 경우에**만 작동**합니다.
 * **사용법:** 말하는 동안 키를 **길게 누릅니다**. 문장을 끝마치고 키에서 손을 떼면 즉시 오디오가 처리되고 번역이 VRChat으로 전송됩니다.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Shortcut Keys Settings]** *(When ready, replace this line with: `![Shortcut Keys Setup](/img/settings-hotkeys.png)`)*
+<img 
+  src={require('./img/settings-hotkeys.jpg').default} 
+  width="900" 
+  alt="Settings Engine" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 

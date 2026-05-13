@@ -1,10 +1,10 @@
 ---
-title: 发送消息 (Outgoing)
-sidebar_label: 发送翻译
+title: 输出系统 (语音 -> VRChat)
+sidebar_label: 输出系统 (语音 -> VRChat)
 sidebar_position: 4
 ---
 
-# 向 VRChat 发送消息 (Outgoing)
+# 输出系统 (语音 -> VRChat)
 
 **发送 (Outgoing) 系统**会翻译您的语音或文本，并将其直接发送到 VRChat 聊天框。这允许其他玩家实时以他们的母语阅读您正在说的内容。
 
@@ -25,7 +25,12 @@ sidebar_position: 4
 3. 按钮将变为红色，表示系统处于活动状态。只需对着麦克风说话即可。
 4. AI 将处理您的语音并自动将翻译发送到 VRChat。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Auto Mode]** *(准备就绪后，将此行替换为：`![Auto Mode](/img/outgoing-auto.png)`)*
+<img 
+  src={require('./img/auto-voice.jpg').default} 
+  width="900" 
+  alt="Auto Voice" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -39,7 +44,12 @@ sidebar_position: 4
 4. 在您说话时点击并按住 **Hold to Speak** 按钮（或按住您分配的按键说话热键）。
 5. 完成后松开按钮。翻译将被处理并立即发送。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Push-to-Talk Mode]** *(准备就绪后，将此行替换为：`![Push-to-Talk Mode](/img/outgoing-push.png)`)*
+<img 
+  src={require('./img/push-to-talk.jpg').default} 
+  width="900" 
+  alt="Push to Talk" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -52,7 +62,12 @@ sidebar_position: 4
 3. 按键盘上的 **Enter** 键或点击 **Send (发送)** 按钮。
 4. 您输入的文本及其翻译将被发送到聊天框。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Manual Text Input]** *(准备就绪后，将此行替换为：`![Manual Text Input](/img/outgoing-manual.png)`)*
+<img 
+  src={require('./img/manual-text.jpg').default} 
+  width="900" 
+  alt="Manual Text" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -60,4 +75,9 @@ sidebar_position: 4
 
 一旦 AI 处理了您的输入，结果将通过 OSC 发送到 VRChat。它将作为聊天气泡出现在您虚拟形象的头顶上，通常会显示您的原始文本，然后是翻译后的文本。
 
-> 🖼️ **[IMAGE PLACEHOLDER: VRChat Result]** *(准备就绪后，将此行替换为：`![VRChat Result Example](/img/outgoing-result.png)`)*
+<img 
+  src={require('./img/chatbox.jpg').default} 
+  width="600" 
+  alt="Chatbox" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>

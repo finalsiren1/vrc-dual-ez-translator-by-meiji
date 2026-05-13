@@ -17,7 +17,12 @@ Google Geminiは、その高速性と文脈上の正確さから、SyncVRCの推
 1. [Google AI Studio](https://aistudio.google.com/)ウェブサイトにアクセスします。
 2. 標準のGoogleアカウントでサインインします。
 
-> 🖼️ **[IMAGE PLACEHOLDER: AI Studio Login Page]** *(準備ができたら、この行を次のように置き換えます: `![AI Studio Login](/img/gemini-login.png)`)*
+<img 
+  src={require('./img/gemini-login.jpg').default} 
+  width="900" 
+  alt="Gemini Login" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -28,7 +33,12 @@ Google Geminiは、その高速性と文脈上の正確さから、SyncVRCの推
 3. Google Cloudプロジェクトを選択するように求められる場合があります。お持ちでない場合は、**"Create API key in new project（新しいプロジェクトでAPIキーを作成）"**を選択します。
 4. 生成されると、ポップアップにAPIキーが表示されます。**このキーをすぐにコピーしてください。**
 
-> 🖼️ **[IMAGE PLACEHOLDER: Create API Key Button]** *(準備ができたら、この行を次のように置き換えます: `![Create API Key](/img/gemini-create-key.png)`)*
+<img 
+  src={require('./img/gemini-create-key.jpg').default} 
+  width="900" 
+  alt="Gemini Login" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -39,7 +49,12 @@ Google Geminiは、その高速性と文脈上の正確さから、SyncVRCの推
 3. **AI & Translation Engine**で、**Translation Engine**を`Google Gemini`に設定します。
 4. コピーしたキーを**API Key**フィールドに貼り付け、**Save（保存）**をクリックします。
 
-> 🖼️ **[IMAGE PLACEHOLDER: SyncVRC Settings Setup]** *(準備ができたら、この行を次のように置き換えます: `![SyncVRC Settings](/img/settings-gemini-setup.png)`)*
+<img 
+  src={require('./img/settings-gemini-setup.jpg').default} 
+  width="900" 
+  alt="Settings Gemini Setup" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 

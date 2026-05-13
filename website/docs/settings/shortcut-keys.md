@@ -25,7 +25,12 @@ You can configure these hotkeys at the bottom of the **Settings** tab. If you pr
 * **Important Requirement:** This hotkey **only works** if you have selected the **Push to Record** mode in the Translation tab AND the Outgoing system is actively running.
 * **Usage:** Press and **hold** the key while you are speaking. Release the key when you finish your sentence to instantly process the audio and send the translation to VRChat.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Shortcut Keys Settings]** *(When ready, replace this line with: `![Shortcut Keys Setup](/img/settings-hotkeys.png)`)*
+<img 
+  src={require('./img/settings-hotkeys.jpg').default} 
+  width="900" 
+  alt="Settings Engine" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 

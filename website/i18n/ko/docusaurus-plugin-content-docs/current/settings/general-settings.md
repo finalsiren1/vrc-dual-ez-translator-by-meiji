@@ -15,7 +15,12 @@ sidebar_position: 1
 * **지원되는 언어:** 영어, 일본어(日本語), 중국어(中文) 및 한국어(Korean).
 * **작동 방식:** 드롭다운 메뉴에서 선호하는 언어를 선택하기만 하면 됩니다. 인터페이스는 재시작할 필요 없이 즉시 업데이트되며 설정은 향후 세션을 위해 자동으로 저장됩니다.
 
-> 🖼️ **[IMAGE PLACEHOLDER: UI Language Dropdown]** *(준비가 되면 이 줄을 다음과 같이 교체하십시오: `![UI Language](/img/settings-lang.png)`)*
+<img 
+  src={require('./img/settings-lang.jpg').default} 
+  width="900" 
+  alt="Settings Lang" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -23,7 +28,12 @@ sidebar_position: 1
 
 시각적 선호도에 맞게 언제든지 다크 모드와 라이트 모드 사이를 전환하여 눈의 피로를 줄일 수 있습니다.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Dark Mode Toggle]** *(준비가 되면 이 줄을 다음과 같이 교체하십시오: `![Appearance Setting](/img/settings-theme.png)`)*
+<img 
+  src={require('./img/settings-theme.jpg').default} 
+  width="900" 
+  alt="Settings Theme" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -35,4 +45,9 @@ sidebar_position: 1
 * **수집되지 않는 항목:** **음성 데이터, 번역된 텍스트, API 키 또는 개인 식별 정보는 절대 수집되지 않습니다.** 개인 정보는 완전히 보장됩니다.
 * **권장 사항:** 버그를 신속하게 식별하고 수정하는 데 도움이 되도록 이 옵션을 활성화된 상태로 두는 것을 강력히 권장하지만 언제든지 확인란을 선택 취소하여 거부할 수 있습니다.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Telemetry Checkbox]** *(준비가 되면 이 줄을 다음과 같이 교체하십시오: `![Telemetry Setting](/img/settings-telemetry.png)`)*
+<img 
+  src={require('./img/settings-telemetry.jpg').default} 
+  width="900" 
+  alt="Settings Telemetry" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>

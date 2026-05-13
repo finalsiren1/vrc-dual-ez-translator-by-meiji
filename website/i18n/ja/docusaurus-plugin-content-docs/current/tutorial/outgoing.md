@@ -1,10 +1,10 @@
 ---
-title: メッセージの送信 (Outgoing)
-sidebar_label: 送信翻訳
+title: 送信システム (音声 -> VRChat)
+sidebar_label: 送信システム (音声 -> VRChat)
 sidebar_position: 4
 ---
 
-# VRChatへのメッセージ送信 (Outgoing)
+# 送信システム (音声 -> VRChat)
 
 **送信（Outgoing）システム**は、あなたの声やテキストを翻訳し、VRChatのチャットボックスに直接送信します。これにより、他のプレイヤーはあなたが言っていることをリアルタイムで彼らの母国語で読むことができます。
 
@@ -25,7 +25,12 @@ sidebar_position: 4
 3. ボタンが赤色になり、システムがアクティブであることを示します。マイクに向かって話すだけです。
 4. AIがあなたの音声を処理し、翻訳をVRChatに自動的に送信します。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Auto Mode]** *(準備ができたら、この行を次のように置き換えます: `![Auto Mode](/img/outgoing-auto.png)`)*
+<img 
+  src={require('./img/auto-voice.jpg').default} 
+  width="900" 
+  alt="Auto Voice" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -39,7 +44,12 @@ sidebar_position: 4
 4. 話している間、**Hold to Speak**ボタンをクリックして押し続けます（または割り当てられたプッシュ・トゥ・トークのホットキーを押し続けます）。
 5. 終わったらボタンを離します。翻訳が処理され、すぐに送信されます。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Push-to-Talk Mode]** *(準備ができたら、この行を次のように置き換えます: `![Push-to-Talk Mode](/img/outgoing-push.png)`)*
+<img 
+  src={require('./img/push-to-talk.jpg').default} 
+  width="900" 
+  alt="Push to Talk" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -52,7 +62,12 @@ sidebar_position: 4
 3. キーボードの**Enter**を押すか、**Send（送信）**ボタンをクリックします。
 4. 入力したテキストとその翻訳がチャットボックスに送信されます。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Manual Text Input]** *(準備ができたら、この行を次のように置き換えます: `![Manual Text Input](/img/outgoing-manual.png)`)*
+<img 
+  src={require('./img/manual-text.jpg').default} 
+  width="900" 
+  alt="Manual Text" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -60,4 +75,9 @@ sidebar_position: 4
 
 AIがあなたの入力を処理すると、結果はOSC経由でVRChatに送信されます。アバターの頭上にチャットバブルとして表示され、通常は元のテキストの後に翻訳されたテキストが表示されます。
 
-> 🖼️ **[IMAGE PLACEHOLDER: VRChat Result]** *(準備ができたら、この行を次のように置き換えます: `![VRChat Result Example](/img/outgoing-result.png)`)*
+<img 
+  src={require('./img/chatbox.jpg').default} 
+  width="600" 
+  alt="Chatbox" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>

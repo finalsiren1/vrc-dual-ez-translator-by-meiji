@@ -17,7 +17,12 @@ Follow these steps to generate and configure your key.
 1. Go to the [Google AI Studio](https://aistudio.google.com/) website.
 2. Sign in with your standard Google Account.
 
-> 🖼️ **[IMAGE PLACEHOLDER: AI Studio Login Page]** *(When ready, replace this line with: `![AI Studio Login](/img/gemini-login.png)`)*
+<img 
+  src={require('./img/gemini-login.jpg').default} 
+  width="900" 
+  alt="Gemini Login" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -28,7 +33,12 @@ Follow these steps to generate and configure your key.
 3. You may be asked to select a Google Cloud Project. If you don't have one, select **"Create API key in new project"**.
 4. Once generated, a pop-up will show your API key. **Copy this key immediately.**
 
-> 🖼️ **[IMAGE PLACEHOLDER: Create API Key Button]** *(When ready, replace this line with: `![Create API Key](/img/gemini-create-key.png)`)*
+<img 
+  src={require('./img/gemini-create-key.jpg').default} 
+  width="900" 
+  alt="Gemini Login" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -39,7 +49,12 @@ Follow these steps to generate and configure your key.
 3. Under **AI & Translation Engine**, set the **Translation Engine** to `Google Gemini`.
 4. Paste your copied key into the **API Key** field and click **Save**.
 
-> 🖼️ **[IMAGE PLACEHOLDER: SyncVRC Settings Setup]** *(When ready, replace this line with: `![SyncVRC Settings](/img/settings-gemini-setup.png)`)*
+<img 
+  src={require('./img/settings-gemini-setup.jpg').default} 
+  width="900" 
+  alt="Settings Gemini Setup" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 

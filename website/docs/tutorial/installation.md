@@ -11,7 +11,7 @@ Installing SyncVRC is straightforward. Follow the steps below to get the applica
 ## Step-by-Step Installation
 
 **Step 1: Download the Installer**
-First, download the latest `SyncVRC_Setup_vX.X.X.exe` file from our official GitHub Releases page.
+First, download the latest `SyncVRC_Setup_vX.X.X.exe` file from our [official GitHub Releases page](https://github.com/finalsiren1/SyncVRC/releases).
 
 **Step 2: Select Setup Language**
 Run the downloaded `.exe` file. You will be prompted to select the language to use during the installation. Select your preferred language (e.g., English) and click **OK**.
@@ -19,7 +19,7 @@ Run the downloaded `.exe` file. You will be prompted to select the language to u
 <img 
   src={require('./img/setup-lang.jpg').default} 
   width="300" 
-  alt="Select Language" 
+  alt="Setup Lang" 
   style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
 />
 
@@ -29,7 +29,7 @@ The setup will ask where you want to install SyncVRC. The default path is usuall
 <img 
   src={require('./img/setup-dest.png').default} 
   width="600" 
-  alt="Select Language" 
+  alt="Setup Dest" 
   style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
 />
 
@@ -39,7 +39,7 @@ Check the box for **"Create a desktop shortcut"** if you want easy access to Syn
 <img 
   src={require('./img/setup-tasks.png').default} 
   width="600" 
-  alt="Select Language" 
+  alt="Setup Task" 
   style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
 />
 
@@ -57,7 +57,14 @@ Once the installation is complete, make sure **"Launch SyncVRC"** is checked and
 <img 
   src={require('./img/setup-finish.png').default} 
   width="600" 
-  alt="Select Language" 
+  alt="Finish Setup" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
+
+<img 
+  src={require('./img/app-launch.jpg').default} 
+  width="900" 
+  alt="App Launch" 
   style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
 />
 
@@ -80,8 +87,8 @@ Furthermore, whenever we release a new update, the file's code changes. If you s
 3. Click the **"Run anyway"** button to proceed with the installation or launch the app.
 
 <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '40px', marginTop: '20px' }}>
-  <img src={require('./img/smartscreen-warning1.png').default} width="45%" alt="Install Step 1" />
-  <img src={require('./img/smartscreen-warning2.png').default} width="45%" alt="Install Step 2" />
+  <img src={require('./img/smartscreen-warning1.png').default} width="45%" alt="Smartscreen 1" />
+  <img src={require('./img/smartscreen-warning2.png').default} width="45%" alt="Smartscreen 2" />
 </div>
 
 By clicking "Run anyway," you are telling Windows that you trust the file downloaded directly from our official repository.

@@ -1,10 +1,10 @@
 ---
-title: 音频设备设置
-sidebar_label: 音频设备
+title: 音频设置
+sidebar_label: 音频设置
 sidebar_position: 1
 ---
 
-# 音频设备设置
+# 音频设置
 
 **Audio Setup (音频设置)** 选项卡是 SyncVRC 音频路由的核心。这里设置不正确是导致 AI 无法拾取您的声音或其他玩家声音的最常见原因。
 
@@ -17,7 +17,12 @@ sidebar_position: 1
 * **选择什么:** 选择您的主要物理麦克风（例如，您的 VR 头显麦克风、USB 电容麦克风或 XLR 接口输入）。
 * **重要提示:** 确保您的麦克风在 Windows 中未静音，否则 AI 将只能听到静音。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Microphone Selection]** *(准备就绪后，将此行替换为：`![Microphone Setup](/img/audio-mic.png)`)*
+<img 
+  src={require('./img/audio-mic.jpg').default} 
+  width="900" 
+  alt="Audio Mic" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -33,7 +38,12 @@ sidebar_position: 1
   * **Voicemeeter**（高级音频混合软件）。
   * **Elgato Wave Link** 或 **SteelSeries Sonar**（如果您使用他们各自的硬件）。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Loopback Selection]** *(准备就绪后，将此行替换为：`![Speaker Loopback Setup](/img/audio-speaker.png)`)*
+<img 
+  src={require('./img/audio-speaker.jpg').default} 
+  width="900" 
+  alt="Audio Speaker" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -44,7 +54,12 @@ sidebar_position: 1
 * **工作原理:** 启用后，SyncVRC 会读取您的 VRChat OSC 参数。如果您使用 VR 控制器或 VRChat 轮盘菜单静音您的麦克风，SyncVRC 会立即暂停发送 (Outgoing) 翻译。
 * **为什么要使用它:** 它可以防止 AI 在您静音时持续监听并将背景噪音发送给您的 API 提供商，从而节省您的 API 额度并确保完全的隐私。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Mute Sync Checkbox]** *(准备就绪后，将此行替换为：`![VRC Mute Sync](/img/audio-mutesync.png)`)*
+<img 
+  src={require('./img/audio-mutesync.jpg').default} 
+  width="900" 
+  alt="Audio Mute Sync" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 

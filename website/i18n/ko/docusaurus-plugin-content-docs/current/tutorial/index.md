@@ -1,11 +1,11 @@
 ---
 slug: /
-title: 튜토리얼
-sidebar_label: 튜토리얼
+title: 번역 메인
+sidebar_label: 번역 메인
 sidebar_position: 1
 ---
 
-# SyncVRC에 오신 것을 환영합니다
+# 번역 메인
 
 이 문서에서는 SyncVRC의 기본 기능, 설치 및 설정에 대해 안내합니다. 시작하려면 아래 단계를 따르십시오.
 

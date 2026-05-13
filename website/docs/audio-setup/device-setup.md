@@ -17,7 +17,12 @@ This setting controls what the AI listens to for the **Outgoing** translation sy
 * **What to select:** Choose your primary, physical microphone (e.g., your VR headset microphone, a USB condenser mic, or an XLR interface input).
 * **Important:** Ensure your microphone is not muted in Windows, or the AI will only hear silence.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Microphone Selection]** *(When ready, replace this line with: `![Microphone Setup](/img/audio-mic.png)`)*
+<img 
+  src={require('./img/audio-mic.jpg').default} 
+  width="900" 
+  alt="Audio Mic" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -33,7 +38,12 @@ This setting controls what the AI listens to for the **Incoming** translation sy
   * **Voicemeeter** (Advanced audio mixing software).
   * **Elgato Wave Link** or **SteelSeries Sonar** (If you use their respective hardware).
 
-> 🖼️ **[IMAGE PLACEHOLDER: Loopback Selection]** *(When ready, replace this line with: `![Speaker Loopback Setup](/img/audio-speaker.png)`)*
+<img 
+  src={require('./img/audio-speaker.jpg').default} 
+  width="900" 
+  alt="Audio Speaker" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -44,7 +54,12 @@ A crucial privacy and optimization feature built specifically for VRChat.
 * **How it works:** When enabled, SyncVRC reads your VRChat OSC parameters. If you mute your microphone using your VR controller or the VRChat radial menu, SyncVRC instantly pauses the Outgoing translation.
 * **Why use it:** It prevents the AI from continuously listening and sending background noise to your API provider while you are muted, saving your API quota and ensuring complete privacy.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Mute Sync Checkbox]** *(When ready, replace this line with: `![VRC Mute Sync](/img/audio-mutesync.png)`)*
+<img 
+  src={require('./img/audio-mutesync.jpg').default} 
+  width="900" 
+  alt="Audio Mute Sync" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 

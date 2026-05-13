@@ -1,10 +1,10 @@
 ---
-title: 高度なオーディオ設定
-sidebar_label: 高度なオーディオ
+title: ⚙️ 高度なオーディオ設定
+sidebar_label: ⚙️ 高度なオーディオ設定
 sidebar_position: 2
 ---
 
-# 高度なオーディオ設定
+# ⚙️ 高度なオーディオ設定
 
 これらのスライダーを使用すると、AIが音声を処理する方法を微調整でき、速度、精度、個人の話すペースのバランスを取るのに役立ちます。
 
@@ -22,4 +22,9 @@ sidebar_position: 2
   * 低い値 (1-2): 処理は速いですが、文脈の精度はわずかに低下します。
   * 高い値 (4-5): 高精度ですが、より多くのGPUパワーを必要とし、処理にわずかに時間がかかります。デフォルトは`2`です。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Advanced Audio Settings]** *(準備ができたら、この行を次のように置き換えます: `![Advanced Audio](/img/audio-advanced.png)`)*
+<img 
+  src={require('./img/audio-advanced.jpg').default} 
+  width="900" 
+  alt="Audio Advanced" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>

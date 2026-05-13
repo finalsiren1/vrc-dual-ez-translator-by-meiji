@@ -1,10 +1,10 @@
 ---
-title: ショートカットキー (ホットキー)
+title: ショートカットキー
 sidebar_label: ショートカットキー
 sidebar_position: 3
 ---
 
-# ショートカットキー (ホットキー)
+# ショートカットキー
 
 SyncVRCは**グローバルホットキー**をサポートしています。つまり、VRChatからAlt-Tabで抜け出したり、アプリケーションウィンドウを最前面に表示したりすることなく、翻訳システムを制御できます。
 
@@ -25,7 +25,12 @@ SyncVRCは**グローバルホットキー**をサポートしています。つ
 * **重要な要件:** このホットキーは、翻訳(Translation)タブで**Push to Record**モードを選択しており、かつ自分の音声翻訳(Outgoing)システムがアクティブに実行されている場合に**のみ機能**します。
 * **使用方法:** 話している間、キーを**押し続け**ます。話し終えたらキーを離すと、即座に音声が処理され、翻訳がVRChatに送信されます。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Shortcut Keys Settings]** *(When ready, replace this line with: `![Shortcut Keys Setup](/img/settings-hotkeys.png)`)*
+<img 
+  src={require('./img/settings-hotkeys.jpg').default} 
+  width="900" 
+  alt="Settings Engine" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 

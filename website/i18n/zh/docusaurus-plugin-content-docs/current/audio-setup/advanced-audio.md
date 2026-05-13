@@ -1,10 +1,10 @@
 ---
-title: 高级音频设置
-sidebar_label: 高级音频
+title: ⚙️ 高级音频设置
+sidebar_label: ⚙️ 高级音频设置
 sidebar_position: 2
 ---
 
-# 高级音频设置
+# ⚙️ 高级音频设置
 
 这些滑块允许您微调 AI 处理语音的方式，帮助您平衡速度、准确性以及您的个人语速。
 
@@ -22,4 +22,9 @@ sidebar_position: 2
   * 较低的值 (1-2): 处理速度更快，但上下文准确性略低。
   * 较高的值 (4-5): 高度准确，但需要更多的 GPU 算力，并且处理时间略长。默认值为 `2`。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Advanced Audio Settings]** *(准备就绪后，将此行替换为：`![Advanced Audio](/img/audio-advanced.png)`)*
+<img 
+  src={require('./img/audio-advanced.jpg').default} 
+  width="900" 
+  alt="Audio Advanced" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>

@@ -21,4 +21,9 @@ These sliders allow you to fine-tune how the AI processes speech, helping you ba
 * **Recommendation:** * Lower values (1-2): Faster processing, but slightly less accurate context.
   * Higher values (4-5): Highly accurate, but requires more GPU power and takes slightly longer to process. Default is `2`.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Advanced Audio Settings]** *(When ready, replace this line with: `![Advanced Audio](/img/audio-advanced.png)`)*
+<img 
+  src={require('./img/audio-advanced.jpg').default} 
+  width="900" 
+  alt="Audio Advanced" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>

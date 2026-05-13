@@ -16,7 +16,12 @@ To translate other players, the app needs to "hear" your game audio. **You canno
 2. Under the **Select Speaker Loopback (Virtual Audio)** dropdown, you must select a loopback device.
 3. *Recommended Virtual Audio Devices:* Windows Stereo Mix, VB-Cable, Voicemeeter, or Elgato Wave Link.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Audio Routing Setup]** *(When ready, replace this line with: `![Audio Routing Setup](/img/incoming-audio.png)`)*
+<img 
+  src={require('./img/incoming-audio.jpg').default} 
+  width="900" 
+  alt="Incoming Audio" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -32,12 +37,22 @@ On the right panel of the **Translation** tab, configure your languages:
 ### 2. Start the Engine
 Click the **Start Incoming** button (or press your assigned hotkey, default: `F3`). The button will turn red to indicate it is actively listening to your desktop audio.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Incoming Setup and Start]** *(When ready, replace this line with: `![Start Incoming](/img/incoming-start.png)`)*
+<img 
+  src={require('./img/incoming-start.jpg').default} 
+  width="900" 
+  alt="Incoming Start" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ### 3. Read the Translation
 When the other person speaks, the AI will process the audio in real-time. The original text and the translated text will appear in the **Incoming Log** text box at the bottom right of the app.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Incoming Log Result]** *(When ready, replace this line with: `![Incoming Result](/img/incoming-result.png)`)*
+<img 
+  src={require('./img/incoming-result.jpg').default} 
+  width="900" 
+  alt="Incoming Result" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 

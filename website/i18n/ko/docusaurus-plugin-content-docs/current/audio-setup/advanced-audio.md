@@ -1,10 +1,10 @@
 ---
-title: 고급 오디오 설정
-sidebar_label: 고급 오디오
+title: ⚙️ 고급 오디오 설정
+sidebar_label: ⚙️ 고급 오디오 설정
 sidebar_position: 2
 ---
 
-# 고급 오디오 설정
+# ⚙️ 고급 오디오 설정
 
 이러한 슬라이더를 사용하면 AI가 음성을 처리하는 방식을 미세 조정하여 속도, 정확성 및 개인의 말하는 속도의 균형을 맞출 수 있습니다.
 
@@ -22,4 +22,9 @@ sidebar_position: 2
   * 낮은 값 (1-2): 처리 속도는 빠르지만 컨텍스트 정확도는 약간 떨어집니다.
   * 높은 값 (4-5): 매우 정확하지만 더 많은 GPU 파워가 필요하고 처리하는 데 시간이 약간 더 걸립니다. 기본값은 `2`입니다.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Advanced Audio Settings]** *(준비가 되면 이 줄을 다음과 같이 교체하십시오: `![Advanced Audio](/img/audio-advanced.png)`)*
+<img 
+  src={require('./img/audio-advanced.jpg').default} 
+  width="900" 
+  alt="Audio Advanced" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>

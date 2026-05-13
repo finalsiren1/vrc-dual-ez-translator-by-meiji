@@ -1,10 +1,10 @@
 ---
-title: メッセージの受信 (Incoming)
-sidebar_label: 受信翻訳
+title: 受信システム (他人の音声を翻訳)
+sidebar_label: 受信システム (他人の音声を翻訳)
 sidebar_position: 5
 ---
 
-# 他人の声を翻訳する (Incoming)
+# 受信システム (他人の音声を翻訳)
 
 **受信（Incoming）システム**は、ゲームから来るオーディオ（他のプレイヤーの声）をリッスンし、あなたの母国語に翻訳します。送信システムとは異なり、これらの翻訳はSyncVRCアプリのインターフェース上にプライベートに表示され、VRChatのチャットボックスには**送信されません**。
 
@@ -16,7 +16,12 @@ sidebar_position: 5
 2. **Select Speaker Loopback (Virtual Audio)（スピーカーループバック（仮想オーディオ）の選択）**ドロップダウンから、ループバックデバイスを選択する必要があります。
 3. *推奨される仮想オーディオデバイス:* Windows Stereo Mix、VB-Cable、Voicemeeter、またはElgato Wave Link。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Audio Routing Setup]** *(準備ができたら、この行を次のように置き換えます: `![Audio Routing Setup](/img/incoming-audio.png)`)*
+<img 
+  src={require('./img/incoming-audio.jpg').default} 
+  width="900" 
+  alt="Incoming Audio" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -32,12 +37,22 @@ sidebar_position: 5
 ### 2. エンジンの開始
 **Start Incoming（受信開始）**ボタンをクリックします（または割り当てられたホットキー、デフォルト：`F3`を押します）。ボタンが赤色になり、デスクトップオーディオをアクティブにリッスンしていることを示します。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Incoming Setup and Start]** *(準備ができたら、この行を次のように置き換えます: `![Start Incoming](/img/incoming-start.png)`)*
+<img 
+  src={require('./img/incoming-start.jpg').default} 
+  width="900" 
+  alt="Incoming Start" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ### 3. 翻訳を読む
 相手が話すと、AIがリアルタイムで音声を処理します。元のテキストと翻訳されたテキストは、アプリの右下にある**Incoming Log（受信ログ）**テキストボックスに表示されます。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Incoming Log Result]** *(準備ができたら、この行を次のように置き換えます: `![Incoming Result](/img/incoming-result.png)`)*
+<img 
+  src={require('./img/incoming-result.jpg').default} 
+  width="900" 
+  alt="Incoming Result" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 

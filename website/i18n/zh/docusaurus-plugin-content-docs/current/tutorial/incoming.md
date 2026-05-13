@@ -1,10 +1,10 @@
 ---
-title: 接收消息 (Incoming)
-sidebar_label: 接收翻译
+title: 输入系统 (翻译他人的声音)
+sidebar_label: 输入系统 (翻译他人的声音)
 sidebar_position: 5
 ---
 
-# 翻译他人的声音 (Incoming)
+# 输入系统 (翻译他人的声音)
 
 **接收 (Incoming) 系统**会监听来自您游戏的音频（其他玩家的声音），并将其翻译成您的母语。与发送系统不同，这些翻译会私密地显示在您的 SyncVRC 应用界面上，而**不会**发送到 VRChat 聊天框。
 
@@ -16,7 +16,12 @@ sidebar_position: 5
 2. 在 **Select Speaker Loopback (Virtual Audio) (选择扬声器回环(虚拟音频))** 下拉菜单下，您必须选择一个回环设备。
 3. *推荐的虚拟音频设备：* Windows 立体声混音 (Stereo Mix)、VB-Cable、Voicemeeter 或 Elgato Wave Link。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Audio Routing Setup]** *(准备就绪后，将此行替换为：`![Audio Routing Setup](/img/incoming-audio.png)`)*
+<img 
+  src={require('./img/incoming-audio.jpg').default} 
+  width="900" 
+  alt="Incoming Audio" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -32,12 +37,22 @@ sidebar_position: 5
 ### 2. 启动引擎
 点击 **Start Incoming (开始接收)** 按钮（或按下您分配的热键，默认：`F3`）。该按钮将变为红色，表示它正在主动监听您的桌面音频。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Incoming Setup and Start]** *(准备就绪后，将此行替换为：`![Start Incoming](/img/incoming-start.png)`)*
+<img 
+  src={require('./img/incoming-start.jpg').default} 
+  width="900" 
+  alt="Incoming Start" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ### 3. 阅读翻译
 当对方说话时，AI 将实时处理音频。原始文本和翻译后的文本将出现在应用程序右下角的 **Incoming Log (接收日志)** 文本框中。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Incoming Log Result]** *(准备就绪后，将此行替换为：`![Incoming Result](/img/incoming-result.png)`)*
+<img 
+  src={require('./img/incoming-result.jpg').default} 
+  width="900" 
+  alt="Incoming Result" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 

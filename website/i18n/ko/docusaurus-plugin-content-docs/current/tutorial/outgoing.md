@@ -1,10 +1,10 @@
 ---
-title: 메시지 송신 (Outgoing)
-sidebar_label: 송신 번역
+title: 송신 시스템 (음성 -> VRChat)
+sidebar_label: 송신 시스템 (음성 -> VRChat)
 sidebar_position: 4
 ---
 
-# VRChat으로 메시지 보내기 (Outgoing)
+# 송신 시스템 (음성 -> VRChat)
 
 **송신(Outgoing) 시스템**은 사용자의 음성이나 텍스트를 번역하여 VRChat 채팅창으로 직접 보냅니다. 이를 통해 다른 플레이어는 사용자가 말하는 내용을 모국어로 실시간으로 읽을 수 있습니다.
 
@@ -25,7 +25,12 @@ sidebar_position: 4
 3. 버튼이 빨간색으로 바뀌어 시스템이 활성 상태임을 나타냅니다. 마이크에 대고 말하기만 하면 됩니다.
 4. AI가 음성을 처리하고 번역을 VRChat으로 자동으로 보냅니다.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Auto Mode]** *(준비가 되면 이 줄을 다음과 같이 교체하십시오: `![Auto Mode](/img/outgoing-auto.png)`)*
+<img 
+  src={require('./img/auto-voice.jpg').default} 
+  width="900" 
+  alt="Auto Voice" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -39,7 +44,12 @@ sidebar_position: 4
 4. 말하는 동안 **Hold to Speak** 버튼을 클릭한 채로 유지합니다(또는 할당된 푸시 투 토크 단축키를 누른 채로 유지합니다).
 5. 완료되면 버튼을 놓습니다. 번역이 즉시 처리되고 전송됩니다.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Push-to-Talk Mode]** *(준비가 되면 이 줄을 다음과 같이 교체하십시오: `![Push-to-Talk Mode](/img/outgoing-push.png)`)*
+<img 
+  src={require('./img/push-to-talk.jpg').default} 
+  width="900" 
+  alt="Push to Talk" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -52,7 +62,12 @@ sidebar_position: 4
 3. 키보드의 **Enter**를 누르거나 **Send (전송)** 버튼을 클릭합니다.
 4. 입력한 텍스트와 번역이 채팅창으로 전송됩니다.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Manual Text Input]** *(준비가 되면 이 줄을 다음과 같이 교체하십시오: `![Manual Text Input](/img/outgoing-manual.png)`)*
+<img 
+  src={require('./img/manual-text.jpg').default} 
+  width="900" 
+  alt="Manual Text" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -60,4 +75,9 @@ sidebar_position: 4
 
 AI가 입력을 처리하면 결과가 OSC를 통해 VRChat으로 전송됩니다. 아바타 머리 위에 말풍선으로 표시되며, 일반적으로 원본 텍스트 뒤에 번역된 텍스트가 표시됩니다.
 
-> 🖼️ **[IMAGE PLACEHOLDER: VRChat Result]** *(준비가 되면 이 줄을 다음과 같이 교체하십시오: `![VRChat Result Example](/img/outgoing-result.png)`)*
+<img 
+  src={require('./img/chatbox.jpg').default} 
+  width="600" 
+  alt="Chatbox" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>

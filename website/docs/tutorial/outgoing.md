@@ -25,7 +25,12 @@ Ideal for hands-free, natural conversations. The AI automatically detects when y
 3. The button will turn red, indicating the system is active. Simply speak into your microphone.
 4. The AI will process your speech and send the translation to VRChat automatically.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Auto Mode]** *(When ready, replace this line with: `![Auto Mode](/img/outgoing-auto.png)`)*
+<img 
+  src={require('./img/auto-voice.jpg').default} 
+  width="900" 
+  alt="Auto Voice" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -39,7 +44,12 @@ Best for noisy environments or when you only want specific sentences translated.
 4. Click and hold the **Hold to Speak** button (or hold your assigned Push-to-Talk hotkey) while you are talking.
 5. Release the button when you are finished. The translation will process and send immediately.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Push-to-Talk Mode]** *(When ready, replace this line with: `![Push-to-Talk Mode](/img/outgoing-push.png)`)*
+<img 
+  src={require('./img/push-to-talk.jpg').default} 
+  width="900" 
+  alt="Push to Talk" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -52,7 +62,12 @@ If you prefer typing or need to send a specific phrase without speaking, you can
 3. Press **Enter** on your keyboard or click the **Send** button.
 4. Your typed text and its translation will be sent to the Chatbox.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Manual Text Input]** *(When ready, replace this line with: `![Manual Text Input](/img/outgoing-manual.png)`)*
+<img 
+  src={require('./img/manual-text.jpg').default} 
+  width="900" 
+  alt="Manual Text" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -60,4 +75,9 @@ If you prefer typing or need to send a specific phrase without speaking, you can
 
 Once the AI processes your input, the result will be sent to VRChat via OSC. It will appear above your avatar's head as a chat bubble, typically displaying your original text followed by the translated text.
 
-> 🖼️ **[IMAGE PLACEHOLDER: VRChat Result]** *(When ready, replace this line with: `![VRChat Result Example](/img/outgoing-result.png)`)*
+<img 
+  src={require('./img/chatbox.jpg').default} 
+  width="600" 
+  alt="Chatbox" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>

@@ -17,7 +17,12 @@ sidebar_position: 1
 1. 访问 [Google AI Studio](https://aistudio.google.com/) 网站。
 2. 使用您的标准 Google 帐户登录。
 
-> 🖼️ **[IMAGE PLACEHOLDER: AI Studio Login Page]** *(准备就绪后，将此行替换为：`![AI Studio Login](/img/gemini-login.png)`)*
+<img 
+  src={require('./img/gemini-login.jpg').default} 
+  width="900" 
+  alt="Gemini Login" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -28,7 +33,12 @@ sidebar_position: 1
 3. 系统可能会要求您选择一个 Google Cloud 项目。如果您没有，请选择 **"Create API key in new project (在新项目中创建 API 密钥)"**。
 4. 生成后，弹出窗口将显示您的 API 密钥。**立即复制此密钥。**
 
-> 🖼️ **[IMAGE PLACEHOLDER: Create API Key Button]** *(准备就绪后，将此行替换为：`![Create API Key](/img/gemini-create-key.png)`)*
+<img 
+  src={require('./img/gemini-create-key.jpg').default} 
+  width="900" 
+  alt="Gemini Login" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -39,7 +49,12 @@ sidebar_position: 1
 3. 在 **AI & Translation Engine (AI 与翻译引擎)** 下，将 **Translation Engine (翻译引擎)** 设置为 `Google Gemini`。
 4. 将复制的密钥粘贴到 **API Key** 字段中，然后点击 **Save (保存)**。
 
-> 🖼️ **[IMAGE PLACEHOLDER: SyncVRC Settings Setup]** *(准备就绪后，将此行替换为：`![SyncVRC Settings](/img/settings-gemini-setup.png)`)*
+<img 
+  src={require('./img/settings-gemini-setup.jpg').default} 
+  width="900" 
+  alt="Settings Gemini Setup" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 

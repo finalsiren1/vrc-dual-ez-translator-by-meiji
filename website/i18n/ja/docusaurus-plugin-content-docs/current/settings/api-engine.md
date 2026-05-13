@@ -1,10 +1,10 @@
 ---
-title: AIと翻訳エンジン
-sidebar_label: AIとエンジン
+title: AI & 翻訳エンジン構成
+sidebar_label: AI & 翻訳エンジン構成
 sidebar_position: 2
 ---
 
-# AIと翻訳エンジンの設定
+# AI & 翻訳エンジン構成
 
 **AI & Translation Engine（AIと翻訳エンジン）**セクションはSyncVRCの核です。ここで、テキストを翻訳するクラウドサービスと、音声を処理するローカルハードウェアを設定します。
 
@@ -17,7 +17,12 @@ sidebar_position: 2
 * **サポートされているエンジン:** Google Gemini、DeepL API、およびOpenAI。
 * **推奨:** **Google Gemini**は強く推奨されており、現在SyncVRC用に完全に最適化されており、信じられないほど高速なリアルタイムの応答と優れた会話のコンテキストを提供します。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Translation Engine Selection]** *(準備ができたら、この行を次のように置き換えます: `![Translation Engine](/img/settings-engine.png)`)*
+<img 
+  src={require('./img/settings-engine.jpg').default} 
+  width="900" 
+  alt="Settings Engine" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -32,7 +37,12 @@ sidebar_position: 2
 * **プライバシーとストリーマーモード:** 保存すると、テキストフィールドがロックされ、キーはアスタリスク（`********`）として隠されます。これにより、配信中や画面共有中に誤ってAPIキーが漏洩するのを防ぎます。
 * **編集方法:** **Edit（編集）**ボタンをクリックしてフィールドのロックを解除し、新しいキーを入力して再度「Save」をクリックします。
 
-> 🖼️ **[IMAGE PLACEHOLDER: API Key Input and Save]** *(準備ができたら、この行を次のように置き換えます: `![API Key Setup](/img/settings-apikey.png)`)*
+<img 
+  src={require('./img/settings-apikey.jpg').default} 
+  width="900" 
+  alt="Settings API Key" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -45,7 +55,12 @@ sidebar_position: 2
 * **CPU (フォールバック):** コンピューターのメインプロセッサを利用します。
   * *使用する場合:* AMDまたはIntelのGPUを使用している場合、または起動時にCUDAエラーが発生した場合は、これを選択します。CPUの処理はGPUの処理よりも著しく遅いことに注意してください。
 
-> 🖼️ **[IMAGE PLACEHOLDER: AI Processing Device Selection]** *(準備ができたら、この行を次のように置き換えます: `![AI Device](/img/settings-device.png)`)*
+<img 
+  src={require('./img/settings-device.jpg').default} 
+  width="900" 
+  alt="Settings Device" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 

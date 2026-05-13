@@ -15,7 +15,12 @@ sidebar_position: 1
 * **支持的语言:** 英语、日语 (日本語)、中文 (Chinese) 和韩语 (한국어)。
 * **工作原理:** 只需从下拉菜单中选择您偏好的语言。界面将立即更新，无需重启，并且您的偏好将自动保存以供将来的会话使用。
 
-> 🖼️ **[IMAGE PLACEHOLDER: UI Language Dropdown]** *(准备就绪后，将此行替换为：`![UI Language](/img/settings-lang.png)`)*
+<img 
+  src={require('./img/settings-lang.jpg').default} 
+  width="900" 
+  alt="Settings Lang" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -23,7 +28,12 @@ sidebar_position: 1
 
 您可以随时在深色模式和浅色模式之间切换，以适应您的视觉偏好并减少眼睛疲劳。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Dark Mode Toggle]** *(准备就绪后，将此行替换为：`![Appearance Setting](/img/settings-theme.png)`)*
+<img 
+  src={require('./img/settings-theme.jpg').default} 
+  width="900" 
+  alt="Settings Theme" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -35,4 +45,9 @@ sidebar_position: 1
 * **不收集什么:** **绝对不会收集任何语音数据、翻译文本、API 密钥或个人身份信息。** 您的隐私得到充分保障。
 * **建议:** 我们强烈建议您启用此功能以帮助我们快速识别和修复错误，但您完全可以随时通过取消选中该框来选择退出。
 
-> 🖼️ **[IMAGE PLACEHOLDER: Telemetry Checkbox]** *(准备就绪后，将此行替换为：`![Telemetry Setting](/img/settings-telemetry.png)`)*
+<img 
+  src={require('./img/settings-telemetry.jpg').default} 
+  width="900" 
+  alt="Settings Telemetry" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>

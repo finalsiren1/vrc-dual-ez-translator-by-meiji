@@ -36,7 +36,18 @@ The app communicates with VRChat via the OSC protocol to type in the chatbox and
 
 **Checking OSC Status:** Once enabled and VRChat is running, check the bottom left of your SyncVRC sidebar. The **OSC Status** indicator should update to **🟢 Detected** to confirm a successful connection.
 
-> 🖼️ **[IMAGE PLACEHOLDER: OSC Status]** *(When ready, replace this line with: `![OSC Status](/img/setup-osc.png)`)*
+<div style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginBottom: '40px', marginTop: '20px' }}>
+  <img src={require('./img/osc-1.jpg').default} width="30%" alt="OSC-1" />
+  <img src={require('./img/osc-2.jpg').default} width="30%" alt="OSC-2" />
+  <img src={require('./img/osc-3.jpg').default} width="30%" alt="OSC-3" />
+</div>
+
+<img 
+  src={require('./img/osc-detected.jpg').default} 
+  width="900" 
+  alt="Select Language" 
+  style={{ marginTop: '20px', marginBottom: '0px', marginLeft: '30px' }} 
+/>
 
 ## 4. Audio Device Configuration
 

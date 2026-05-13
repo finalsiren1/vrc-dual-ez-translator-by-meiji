@@ -17,7 +17,12 @@ Choose the cloud AI provider that will handle the text translation.
 * **Supported Engines:** Google Gemini, DeepL API, and OpenAI.
 * **Recommendation:** **Google Gemini** is highly recommended and currently fully optimized for SyncVRC, offering incredibly fast real-time responses and excellent conversational context.
 
-> 🖼️ **[IMAGE PLACEHOLDER: Translation Engine Selection]** *(When ready, replace this line with: `![Translation Engine](/img/settings-engine.png)`)*
+<img 
+  src={require('./img/settings-engine.jpg').default} 
+  width="900" 
+  alt="Settings Engine" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -31,7 +36,12 @@ To use the cloud translation services, you must provide your own API key from yo
 * **Privacy & Streamer Mode:** Once saved, the text field will be locked and your key will be hidden as asterisks (`********`). This prevents you from accidentally leaking your API key while streaming or screen sharing.
 * **How to Edit:** Click the **Edit** button to unlock the field, enter your new key, and click Save again.
 
-> 🖼️ **[IMAGE PLACEHOLDER: API Key Input and Save]** *(When ready, replace this line with: `![API Key Setup](/img/settings-apikey.png)`)*
+<img 
+  src={require('./img/settings-apikey.jpg').default} 
+  width="900" 
+  alt="Settings API Key" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
@@ -44,7 +54,12 @@ This setting determines which hardware component on your computer runs the offli
 * **CPU (Fallback):** Utilizes your computer's main processor. 
   * *When to use:* Select this if you have an AMD or Intel GPU, or if you encounter CUDA errors on startup. Note that CPU processing is noticeably slower than GPU processing.
 
-> 🖼️ **[IMAGE PLACEHOLDER: AI Processing Device Selection]** *(When ready, replace this line with: `![AI Device](/img/settings-device.png)`)*
+<img 
+  src={require('./img/settings-device.jpg').default} 
+  width="900" 
+  alt="Settings Device" 
+  style={{ marginTop: '20px', marginBottom: '40px', marginLeft: '30px' }} 
+/>
 
 ---
 
