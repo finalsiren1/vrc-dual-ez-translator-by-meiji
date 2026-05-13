@@ -10,7 +10,6 @@ import os
 import numpy as np
 import webbrowser
 import socket
-import pyaudio
 import urllib.request
 import zipfile
 import tempfile
@@ -39,12 +38,13 @@ ctk.set_default_color_theme("blue")
 
 # ================= CUSTOM WIDGET =================
 class NavItem(ctk.CTkFrame):
-    def __init__(self, master, text_var, command, **kwargs):
+    def __init__(self, master, text_var, command, hover_color=("gray85", "gray25"), **kwargs):
         super().__init__(master, fg_color="transparent", cursor="hand2", height=40, **kwargs)
         self.pack_propagate(False) 
         
         self.command = command
         self.is_active = False
+        self.hover_color = hover_color
         
         self.indicator = ctk.CTkFrame(self, width=4, corner_radius=0, fg_color="transparent")
         self.indicator.pack(side="left", fill="y", pady=2)
@@ -62,7 +62,7 @@ class NavItem(ctk.CTkFrame):
 
     def on_enter(self, e):
         if not self.is_active:
-            self.configure(fg_color=("gray85", "gray25"))
+            self.configure(fg_color=self.hover_color)
     
     def on_leave(self, e):
         if not self.is_active:
@@ -117,6 +117,7 @@ class SyncVRCApp:
         self.out_tgt_val = "Japanese"
         self.in_src_val = "Japanese"
         self.in_tgt_val = "English"
+        self.whisper_model_val = "medium"
         
         self.trans_engine_val = "Google Gemini"
         self.ai_device_val = "GPU (NVIDIA)"
@@ -264,7 +265,7 @@ rmdir /S /Q "{extract_path}"
             os._exit(0)
 
         except Exception as e:
-            self.root.after(0, lambda: messagebox.showerror("Update Error", f"Failed to auto-update: {e}"))
+            self.root.after(0, lambda err=e: messagebox.showerror("Update Error", f"Failed to auto-update: {err}"))
 
     def run_osc_server(self):
         disp = dispatcher.Dispatcher()
@@ -417,16 +418,37 @@ rmdir /S /Q "{extract_path}"
                 "engine_lbl": "Translation Engine:",
                 "device_lbl": "AI Processing Device:",
                 "device_info": "GPU requires NVIDIA & CUDA. CPU is slower but works on AMD/Intel PCs.",
-                "model_fixed_info": "ℹ️ Audio recognition uses the Whisper 'medium' model by default for optimal accuracy (cannot be changed).",
+                                "model_lbl": "Whisper Model:",
+                "btn_clear_cache": "Clear Cache",
+                "nav_docs": "Documentation",
+                "confirm_download_title": "Download Required",
+                "confirm_download_msg": "This model ({}) is not downloaded yet.\nDownload size: approx. {}\nDo you want to proceed?",
+                "confirm_clear_title": "Clear Cache",
+                "confirm_clear_msg": "Are you sure you want to delete all unused models?",
+                "downloading_model_title": "Downloading Model",
+                "downloading_model_msg": "Downloading {} model: {}%",
+                "cache_cleared_msg": "Unused models have been removed.",
+                "model_info_tiny": "Size: ~75 MB | RAM: ~1 GB | Accuracy: Low — Fast, suitable for simple/short phrases",
+                "model_info_base": "Size: ~145 MB | RAM: ~1 GB | Accuracy: Fair — Good balance for casual use",
+                "model_info_small": "Size: ~484 MB | RAM: ~2 GB | Accuracy: Good — Recommended for most users",
+                "model_info_medium": "Size: ~1.5 GB | RAM: ~5 GB | Accuracy: High — Best for clear audio (Default)",
+                "model_info_large": "Size: ~3.1 GB | RAM: ~10 GB | Accuracy: Very High — Best quality, requires strong GPU",
+
                 "hk_out_lbl": "Start Outgoing:",
                 "hk_in_lbl": "Start Incoming:",
                 "hk_push_lbl": "Hold to Speak (Push Mode):",
                 "warn_same_lang": "Source and target languages cannot be the same.",
+                "warn_same_lang_lock": "Same language selected. Start button is locked until you change the language.",
                 "warn_osc_forgot": "VRChat OSC not detected on default port (9000).\nIf you use a different port, you can ignore this.\nOtherwise, don't forget to enable it in the radial menu!\n\n(Starting anyway...)",
                 "err_cuda_not_found": "CUDA/GPU Error: No compatible NVIDIA GPU found.\n👉 If using AMD/Intel, go to Settings -> Change 'AI Device' to CPU.\n👉 If using NVIDIA, install CUDA 12.x: https://developer.nvidia.com/cuda-12-9-1-download-archive",
                 "err_api_limit": "API Limit Exceeded: Too many requests. Please check your quota or wait a moment.",
                 "err_api_invalid": "API Error: Invalid API Key. Please check your key in Settings.",
                 "err_api_empty": "❌ Please enter your API Key in the Settings tab before starting.",
+                "alert_cuda": "CUDA/GPU Error\n\nNo compatible NVIDIA GPU was found on your system.\n\n• If you use AMD or Intel, please go to Settings and change 'AI Device' to CPU.\n• If you use NVIDIA, please download and install CUDA Toolkit 12.x from:\nhttps://developer.nvidia.com/cuda-12-9-1-download-archive\n\nThe system has been stopped.",
+                "alert_api_limit": "API Rate Limit Reached\n\nYou have exceeded the API request limit. This usually happens with free-tier keys.\n\nPlease wait a moment before trying again, or consider upgrading to a paid API plan for uninterrupted use.\n\nThe system has been stopped.",
+                "alert_api_invalid": "Invalid API Key\n\nYour API key was rejected by the server. Please go to Settings and check that your key is correct.\n\nThe system has been stopped.",
+                "alert_whisper_error": "Speech Recognition Error\n\nFailed to load the Whisper model: {}\n\nThe system has been stopped.",
+                "alert_api_generic": "Translation Error\n\nAn unexpected error occurred: {}\n\nThe system has been stopped.",
                 "adv_audio_lbl": "Advanced Audio Settings",
                 "silence_timeout_lbl": "Silence Timeout (Wait to finish):",
                 "max_record_time_lbl": "Max Recording Time per phrase:",
@@ -493,16 +515,37 @@ rmdir /S /Q "{extract_path}"
                 "engine_lbl": "翻訳エンジン:",
                 "device_lbl": "AI 処理デバイス:",
                 "device_info": "GPUにはNVIDIAとCUDAが必要です。CPUはAMD/Intelで動作しますが遅くなります。",
-                "model_fixed_info": "ℹ️ 音声認識には、最適な精度のためにデフォルトでWhisper「medium」モデルが使用されます（変更不可）。",
+                                "model_lbl": "Whisper モデル:",
+                "btn_clear_cache": "キャッシュをクリア",
+                "nav_docs": "ドキュメンテーション",
+                "confirm_download_title": "ダウンロードが必要です",
+                "confirm_download_msg": "このモデル ({}) はまだダウンロードされていません。\nダウンロードサイズ: 約 {}\n続行しますか？",
+                "confirm_clear_title": "キャッシュをクリア",
+                "confirm_clear_msg": "使用されていないすべてのモデルを削除してもよろしいですか？",
+                "downloading_model_title": "モデルをダウンロード中",
+                "downloading_model_msg": "{} モデルをダウンロード中: {}%",
+                "cache_cleared_msg": "未使用のモデルが削除されました。",
+                "model_info_tiny": "サイズ: ~75 MB | RAM: ~1 GB | 精度: 低 — 高速、短いフレーズに適しています",
+                "model_info_base": "サイズ: ~145 MB | RAM: ~1 GB | 精度: 普通 — カジュアルな使用に最適",
+                "model_info_small": "サイズ: ~484 MB | RAM: ~2 GB | 精度: 良好 — ほとんどのユーザーにおすすめ",
+                "model_info_medium": "サイズ: ~1.5 GB | RAM: ~5 GB | 精度: 高い — クリアな音声に最適 (デフォルト)",
+                "model_info_large": "サイズ: ~3.1 GB | RAM: ~10 GB | 精度: 非常に高い — 最高品質、強力なGPUが必要",
+
                 "hk_out_lbl": "送信開始:",
                 "hk_in_lbl": "受信開始:",
                 "hk_push_lbl": "押している間話す:",
                 "warn_same_lang": "翻訳元と翻訳先の言語を同じにすることはできません。",
+                "warn_same_lang_lock": "同じ言語が選択されています。言語を変更するまで開始ボタンはロックされます。",
                 "warn_osc_forgot": "デフォルトポート(9000)でVRChat OSCが検出されませんでした。\n別のポートを使用している場合は無視してください。\n（そのまま開始します...）",
                 "err_cuda_not_found": "CUDA/GPU エラー: 互換性のあるNVIDIA GPUが見つかりません。\n👉 AMD/Intelを使用している場合は、設定で「AIデバイス」をCPUに変更してください。\n👉 NVIDIAを使用している場合は、CUDA 12.xをインストールしてください: https://developer.nvidia.com/cuda-12-9-1-download-archive",
                 "err_api_limit": "API制限超過: リクエストが多すぎます。しばらくお待ちください。",
                 "err_api_invalid": "APIエラー: 無効なAPIキーです。設定を確認してください。",
                 "err_api_empty": "❌ 開始する前に、設定タブでAPIキーを入力してください。",
+                "alert_cuda": "CUDA/GPU エラー\n\nお使いのシステムに互換性のあるNVIDIA GPUが見つかりませんでした。\n\n• AMDまたはIntelをご利用の場合は、設定の「AIデバイス」をCPUに変更してください。\n• NVIDIAをご利用の場合は、CUDA Toolkit 12.x をダウンロードしてインストールしてください：\nhttps://developer.nvidia.com/cuda-12-9-1-download-archive\n\nシステムは停止されました。",
+                "alert_api_limit": "APIレート制限\n\nAPIリクエストの制限を超えました。無料枠のキーではよく発生します。\n\n少し待ってから再度お試しいただくか、有料APIプランへのアップグレードをご検討ください。\n\nシステムは停止されました。",
+                "alert_api_invalid": "無効なAPIキー\n\nAPIキーがサーバーに拒否されました。設定でキーが正しいか確認してください。\n\nシステムは停止されました。",
+                "alert_whisper_error": "音声認識エラー\n\nWhisperモデルの読み込みに失敗しました: {}\n\nシステムは停止されました。",
+                "alert_api_generic": "翻訳エラー\n\n予期しないエラーが発生しました: {}\n\nシステムは停止されました。",
                 "adv_audio_lbl": "⚙️ 高度なオーディオ設定",
                 "silence_timeout_lbl": "無音タイムアウト (発話終了の待機):",
                 "max_record_time_lbl": "1回の最大録音時間:",
@@ -569,16 +612,37 @@ rmdir /S /Q "{extract_path}"
                 "engine_lbl": "翻译引擎:",
                 "device_lbl": "AI 处理设备:",
                 "device_info": "GPU 需要 NVIDIA 和 CUDA。CPU 较慢，但适用于 AMD/Intel 电脑。",
-                "model_fixed_info": "ℹ️ 语音识别默认使用 Whisper 'medium' 模型以确保最佳准确率（不可更改）。",
+                                "model_lbl": "Whisper 模型:",
+                "btn_clear_cache": "清除缓存",
+                "nav_docs": "文档",
+                "confirm_download_title": "需要下载",
+                "confirm_download_msg": "此模型 ({}) 尚未下载。\n下载大小: 约 {}\n要继续吗？",
+                "confirm_clear_title": "清除缓存",
+                "confirm_clear_msg": "您确定要删除所有未使用的模型吗？",
+                "downloading_model_title": "正在下载模型",
+                "downloading_model_msg": "正在下载 {} 模型: {}%",
+                "cache_cleared_msg": "未使用的模型已删除。",
+                "model_info_tiny": "大小: ~75 MB | 内存: ~1 GB | 准确度: 低 — 速度快，适合简单/短语",
+                "model_info_base": "大小: ~145 MB | 内存: ~1 GB | 准确度: 一般 — 适合日常使用",
+                "model_info_small": "大小: ~484 MB | 内存: ~2 GB | 准确度: 良好 — 推荐大多数用户使用",
+                "model_info_medium": "大小: ~1.5 GB | 内存: ~5 GB | 准确度: 高 — 适合清晰音频 (默认)",
+                "model_info_large": "大小: ~3.1 GB | 内存: ~10 GB | 准确度: 非常高 — 最佳质量，需要强大GPU",
+
                 "hk_out_lbl": "开始输出:",
                 "hk_in_lbl": "开始输入:",
                 "hk_push_lbl": "按住说话:",
                 "warn_same_lang": "源语言和目标语言不能相同。",
+                "warn_same_lang_lock": "已选择相同语言。在更改语言之前，开始按钮将被锁定。",
                 "warn_osc_forgot": "未在默认端口 (9000) 上检测到 VRChat OSC。\n如果您使用其他端口，请忽略此消息。\n(仍将继续启动...)",
                 "err_cuda_not_found": "CUDA/GPU 错误: 未找到兼容的 NVIDIA GPU。\n👉 如果使用 AMD/Intel，请在设置中将“AI 处理设备”更改为 CPU。\n👉 如果使用 NVIDIA，请安装 CUDA 12.x: https://developer.nvidia.com/cuda-12-9-1-download-archive",
                 "err_api_limit": "API 限制: 请求过多，请稍后再试。",
                 "err_api_invalid": "API 错误: 密钥无效，请检查设置。",
                 "err_api_empty": "❌ 开始之前，请在设置选项卡中输入您的 API 密钥。",
+                "alert_cuda": "CUDA/GPU 错误\n\n未在您的系统中找到兼容的 NVIDIA GPU。\n\n• 如果使用 AMD 或 Intel，请前往设置将'AI 处理设备'更改为 CPU。\n• 如果使用 NVIDIA，请下载并安装 CUDA Toolkit 12.x：\nhttps://developer.nvidia.com/cuda-12-9-1-download-archive\n\n系统已停止。",
+                "alert_api_limit": "API 请求频率限制\n\n已超过 API 请求限制。使用免费密钥时经常会发生这种情况。\n\n请稍等片刻后重试，或者考虑升级到付费 API 方案以获得不间断的使用体验。\n\n系统已停止。",
+                "alert_api_invalid": "API 密钥无效\n\n您的 API 密钥已被服务器拒绝。请前往设置检查您的密钥是否正确。\n\n系统已停止。",
+                "alert_whisper_error": "语音识别错误\n\nWhisper 模型加载失败: {}\n\n系统已停止。",
+                "alert_api_generic": "翻译错误\n\n发生意外错误: {}\n\n系统已停止。",
                 "adv_audio_lbl": "⚙️ 高级音频设置",
                 "silence_timeout_lbl": "静音超时 (等待说话结束):",
                 "max_record_time_lbl": "单次最大录音时间:",
@@ -645,16 +709,37 @@ rmdir /S /Q "{extract_path}"
                 "engine_lbl": "번역 엔진:",
                 "device_lbl": "AI 처리 장치:",
                 "device_info": "GPU는 NVIDIA 및 CUDA가 필요합니다. CPU는 AMD/Intel에서 작동하지만 느립니다.",
-                "model_fixed_info": "ℹ️ 음성 인식은 최적의 정확도를 위해 기본적으로 Whisper 'medium' 모델을 사용합니다 (변경 불가).",
+                                "model_lbl": "Whisper 모델:",
+                "btn_clear_cache": "캐시 지우기",
+                "nav_docs": "문서",
+                "confirm_download_title": "다운로드 필요",
+                "confirm_download_msg": "이 모델({})은 아직 다운로드되지 않았습니다.\n다운로드 크기: 약 {}\n계속하시겠습니까?",
+                "confirm_clear_title": "캐시 지우기",
+                "confirm_clear_msg": "사용하지 않는 모든 모델을 삭제하시겠습니까?",
+                "downloading_model_title": "모델 다운로드 중",
+                "downloading_model_msg": "{} 모델 다운로드 중: {}%",
+                "cache_cleared_msg": "사용하지 않는 모델이 제거되었습니다.",
+                "model_info_tiny": "크기: ~75 MB | RAM: ~1 GB | 정확도: 낮음 — 빠름, 짧은 문장에 적합",
+                "model_info_base": "크기: ~145 MB | RAM: ~1 GB | 정확도: 보통 — 일상적인 사용에 적합",
+                "model_info_small": "크기: ~484 MB | RAM: ~2 GB | 정확도: 양호 — 대부분의 사용자에게 권장",
+                "model_info_medium": "크기: ~1.5 GB | RAM: ~5 GB | 정확도: 높음 — 깨끗한 오디오에 최적 (기본값)",
+                "model_info_large": "크기: ~3.1 GB | RAM: ~10 GB | 정확도: 매우 높음 — 최상의 품질, 강력한 GPU 필요",
+
                 "hk_out_lbl": "송신 시작:",
                 "hk_in_lbl": "수신 시작:",
                 "hk_push_lbl": "누른 채로 말하기:",
                 "warn_same_lang": "출발어와 도착어를 같게 설정할 수 없습니다.",
+                "warn_same_lang_lock": "같은 언어가 선택되었습니다. 언어를 변경할 때까지 시작 버튼이 잠깁니다.",
                 "warn_osc_forgot": "기본 포트(9000)에서 VRChat OSC가 감지되지 않았습니다.\n다른 포트를 사용하는 경우 무시하셔도 됩니다.\n(그래도 시작합니다...)",
                 "err_cuda_not_found": "CUDA/GPU 오류: 호환되는 NVIDIA GPU를 찾을 수 없습니다.\n👉 AMD/Intel을 사용하는 경우 설정에서 'AI 디바이스'를 CPU로 변경하십시오.\n👉 NVIDIA를 사용하는 경우 CUDA 고설치하십시오: https://developer.nvidia.com/cuda-12-9-1-download-archive",
                 "err_api_limit": "API 한도 초과: 요청이 너무 많습니다. 잠시 기다려 주십시오.",
                 "err_api_invalid": "API 오류: 잘못된 API 키입니다. 설정에서 키를 확인하십시오.",
                 "err_api_empty": "❌ 시작하기 전에 설정 탭에서 API 키를 입력하십시오.",
+                "alert_cuda": "CUDA/GPU 오류\n\n시스템에서 호환되는 NVIDIA GPU를 찾을 수 없습니다.\n\n• AMD 또는 Intel을 사용하는 경우 설정에서 'AI 디바이스'를 CPU로 변경하세요.\n• NVIDIA를 사용하는 경우 CUDA Toolkit 12.x를 다운로드하여 설치하세요:\nhttps://developer.nvidia.com/cuda-12-9-1-download-archive\n\n시스템이 중지되었습니다.",
+                "alert_api_limit": "API 요청 한도 초과\n\nAPI 요청 한도를 초과했습니다. 무료 등급 키에서 자주 발생합니다.\n\n잠시 기다린 후 다시 시도하거나, 유료 API 요금제로 업그레이드를 고려해 주세요.\n\n시스템이 중지되었습니다.",
+                "alert_api_invalid": "잘못된 API 키\n\nAPI 키가 서버에서 거부되었습니다. 설정에서 키가 올바른지 확인하세요.\n\n시스템이 중지되었습니다.",
+                "alert_whisper_error": "음성 인식 오류\n\nWhisper 모델 로드에 실패했습니다: {}\n\n시스템이 중지되었습니다.",
+                "alert_api_generic": "번역 오류\n\n예상치 못한 오류가 발생했습니다: {}\n\n시스템이 중지되었습니다.",
                 "adv_audio_lbl": "⚙️ 고급 오디오 설정",
                 "silence_timeout_lbl": "무음 시간 초과 (말하기 종료 대기):",
                 "max_record_time_lbl": "1회 최대 녹음 시간:",
@@ -680,14 +765,47 @@ rmdir /S /Q "{extract_path}"
         def _select_all_textbox(event):
             event.widget.tag_add("sel", "1.0", "end")
             return "break"
+
+        def _copy_entry(event):
+            try:
+                event.widget.event_generate("<<Copy>>")
+            except: pass
+            return "break"
+
+        def _paste_entry(event):
+            try:
+                event.widget.event_generate("<<Paste>>")
+            except: pass
+            return "break"
+        
+        def _on_key_entry(event):
+            # Check for Ctrl held (state bit 0x4) and match keycode for A(65), C(67), V(86)
+            if event.state & 0x4:
+                if event.keycode == 65:  # A
+                    return _select_all_entry(event)
+                elif event.keycode == 67:  # C
+                    return _copy_entry(event)
+                elif event.keycode == 86:  # V
+                    return _paste_entry(event)
+
+        def _on_key_textbox(event):
+            if event.state & 0x4:
+                if event.keycode == 65:  # A
+                    return _select_all_textbox(event)
+                elif event.keycode == 67:  # C
+                    return _copy_entry(event)
+                elif event.keycode == 86:  # V
+                    return _paste_entry(event)
             
         inner_widget = widget._entry if is_entry else widget._textbox
         if is_entry:
             inner_widget.bind("<Control-a>", _select_all_entry)
             inner_widget.bind("<Control-A>", _select_all_entry)
+            inner_widget.bind("<KeyPress>", _on_key_entry)
         else:
             inner_widget.bind("<Control-a>", _select_all_textbox)
             inner_widget.bind("<Control-A>", _select_all_textbox)
+            inner_widget.bind("<KeyPress>", _on_key_textbox)
 
     def update_settings_state(self):
         any_running = self.is_running_out or self.is_running_in
@@ -702,7 +820,10 @@ rmdir /S /Q "{extract_path}"
         self.lbl_api_key.configure(text_color=text_color)
         self.lbl_device.configure(text_color=text_color)
         self.lbl_device_info.configure(text_color=text_color)
-        self.lbl_model_fixed_info.configure(text_color=text_color)
+        if hasattr(self, 'lbl_model'):
+            self.lbl_model.configure(text_color=text_color)
+            self.whisper_model_combo.configure(state=state)
+            self.btn_clear_cache.configure(state=state)
         
         if any_running:
             self.api_key_entry.configure(state="disabled", fg_color=("gray85", "gray25"))
@@ -722,7 +843,7 @@ rmdir /S /Q "{extract_path}"
 
         # ================= SIDEBAR =================
         self.sidebar_frame = ctk.CTkFrame(self.root, width=200, corner_radius=0)
-        self.sidebar_frame.grid(row=0, column=0, sticky="nsew")
+        self.sidebar_frame.grid(row=0, column=0, rowspan=2, sticky="nsew")
         
         # --- สร้าง Frame จัดกลุ่ม Logo + Text ---
         self.header_frame = ctk.CTkFrame(self.sidebar_frame, fg_color="transparent")
@@ -756,6 +877,9 @@ rmdir /S /Q "{extract_path}"
 
         self.btn_nav_settings = NavItem(self.sidebar_frame, text_var=self.get_t("nav_settings"), command=lambda: self.select_frame("settings"))
         self.btn_nav_settings.pack(fill="x", pady=2)
+
+        self.btn_nav_docs = NavItem(self.sidebar_frame, text_var=self.get_t("nav_docs") + " ↗", command=lambda: webbrowser.open("https://finalsiren1.github.io/SyncVRC/"), hover_color=("#e2e8f0", "#334155"))
+        self.btn_nav_docs.pack(fill="x", pady=(20, 2))
 
         # จุดสำหรับวางปุ่ม Update เมื่อปฏิเสธ Pop-up
         self.update_btn_frame = ctk.CTkFrame(self.sidebar_frame, fg_color="transparent")
@@ -801,7 +925,7 @@ rmdir /S /Q "{extract_path}"
         elif name == "settings": self.frame_settings.tkraise()
 
     def build_trans_frame(self):
-        langs = ["English", "Japanese", "Chinese", "Korean"]
+        langs = ["English", "Japanese", "Chinese", "Korean", "Spanish", "Russian", "French", "German", "Portuguese", "Thai"]
         self.frame_trans.columnconfigure(0, weight=1)
         self.frame_trans.columnconfigure(1, weight=1)
         self.frame_trans.rowconfigure(0, weight=1)
@@ -1030,34 +1154,45 @@ rmdir /S /Q "{extract_path}"
         self.lbl_device_info = ctk.CTkLabel(panel, text_color="gray", font=ctk.CTkFont(size=11))
         self.lbl_device_info.grid(row=9, column=1, columnspan=2, sticky="w", pady=(0, 5))
 
-        self.lbl_model_fixed_info = ctk.CTkLabel(panel, text_color="gray", font=ctk.CTkFont(size=11))
-        self.lbl_model_fixed_info.grid(row=10, column=1, columnspan=2, sticky="w", pady=(0, 5))
+        self.lbl_model = ctk.CTkLabel(panel, width=160, anchor="w")
+        self.lbl_model.grid(row=10, column=0, sticky="w", padx=30, pady=5)
+        
+        self.whisper_model_combo = ctk.CTkOptionMenu(panel, width=200, command=self.on_model_change)
+        self.whisper_model_combo.grid(row=10, column=1, sticky="w", pady=5)
+        self.update_model_dropdown()
+        
+        self.btn_clear_cache = ctk.CTkButton(panel, width=120, command=self.clear_model_cache, fg_color="#dc3545", hover_color="#c82333")
+        self.btn_clear_cache.grid(row=10, column=2, sticky="w", padx=(10, 0), pady=5)
 
-        ctk.CTkFrame(panel, height=2, fg_color=("gray85", "gray30")).grid(row=11, column=0, columnspan=3, sticky="ew", padx=30, pady=20)
+        self.lbl_model_info = ctk.CTkLabel(panel, text="", text_color="gray", font=ctk.CTkFont(size=11), wraplength=500, justify="left")
+        self.lbl_model_info.grid(row=11, column=1, columnspan=2, sticky="w", pady=(0, 5))
+        self.update_model_info_label()
+
+        ctk.CTkFrame(panel, height=2, fg_color=("gray85", "gray30")).grid(row=12, column=0, columnspan=3, sticky="ew", padx=30, pady=20)
 
         # --- Section 3: Hotkeys ---
         self.lbl_sec_hotkey = ctk.CTkLabel(panel, font=ctk.CTkFont(size=16, weight="bold"))
-        self.lbl_sec_hotkey.grid(row=12, column=0, columnspan=3, sticky="w", padx=30, pady=(0, 10))
+        self.lbl_sec_hotkey.grid(row=13, column=0, columnspan=3, sticky="w", padx=30, pady=(0, 10))
 
         keys = ["None", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "Insert", "Delete", "Home", "End", "PageUp", "PageDown", "Pause"]
         
         self.lbl_hk_out_set = ctk.CTkLabel(panel, width=160, anchor="w")
-        self.lbl_hk_out_set.grid(row=13, column=0, sticky="w", padx=30, pady=5)
+        self.lbl_hk_out_set.grid(row=14, column=0, sticky="w", padx=30, pady=5)
         self.cmb_hk_out = ctk.CTkOptionMenu(panel, values=keys, width=200, command=self.on_hotkey_change)
         self.cmb_hk_out.set(self.hk_out)
-        self.cmb_hk_out.grid(row=13, column=1, sticky="w", pady=5)
+        self.cmb_hk_out.grid(row=14, column=1, sticky="w", pady=5)
 
         self.lbl_hk_in_set = ctk.CTkLabel(panel, width=160, anchor="w")
-        self.lbl_hk_in_set.grid(row=14, column=0, sticky="w", padx=30, pady=5)
+        self.lbl_hk_in_set.grid(row=15, column=0, sticky="w", padx=30, pady=5)
         self.cmb_hk_in = ctk.CTkOptionMenu(panel, values=keys, width=200, command=self.on_hotkey_change)
         self.cmb_hk_in.set(self.hk_in)
-        self.cmb_hk_in.grid(row=14, column=1, sticky="w", pady=5)
+        self.cmb_hk_in.grid(row=15, column=1, sticky="w", pady=5)
 
         self.lbl_hk_push_set = ctk.CTkLabel(panel, width=160, anchor="w")
-        self.lbl_hk_push_set.grid(row=15, column=0, sticky="w", padx=30, pady=5)
+        self.lbl_hk_push_set.grid(row=16, column=0, sticky="w", padx=30, pady=5)
         self.cmb_hk_push = ctk.CTkOptionMenu(panel, values=keys, width=200, command=self.on_hotkey_change)
         self.cmb_hk_push.set(self.hk_push)
-        self.cmb_hk_push.grid(row=15, column=1, sticky="w", pady=5)
+        self.cmb_hk_push.grid(row=16, column=1, sticky="w", pady=5)
 
     def build_footer(self):
         footer_frame = ctk.CTkFrame(self.root, fg_color="transparent", height=40)
@@ -1081,25 +1216,29 @@ rmdir /S /Q "{extract_path}"
     def on_out_lang_change(self, value):
         src = self.src_lang_out.get()
         tgt = self.tgt_lang_out.get()
-        if src == tgt:
+        if src == tgt and self.is_running_out:
             messagebox.showwarning("SyncVRC", self.get_t("warn_same_lang"))
             self.src_lang_out.set(self.out_src_val)
             self.tgt_lang_out.set(self.out_tgt_val)
         else:
             self.out_src_val = src
             self.out_tgt_val = tgt
+            if src == tgt:
+                messagebox.showwarning("SyncVRC", self.get_t("warn_same_lang"))
             self.save_all_settings()
 
     def on_in_lang_change(self, value):
         src = self.src_lang_in.get()
         tgt = self.tgt_lang_in.get()
-        if src == tgt:
+        if src == tgt and self.is_running_in:
             messagebox.showwarning("SyncVRC", self.get_t("warn_same_lang"))
             self.src_lang_in.set(self.in_src_val)
             self.tgt_lang_in.set(self.in_tgt_val)
         else:
             self.in_src_val = src
             self.in_tgt_val = tgt
+            if src == tgt:
+                messagebox.showwarning("SyncVRC", self.get_t("warn_same_lang"))
             self.save_all_settings()
 
     def on_engine_change(self, value):
@@ -1192,6 +1331,7 @@ rmdir /S /Q "{extract_path}"
                     self.current_ui_lang = data.get("ui_lang", "English")
                     
                     self.is_dark_mode = data.get("theme_dark", False)
+                    self.whisper_model_val = data.get("whisper_model", "medium")
                     ctk.set_appearance_mode("Dark" if self.is_dark_mode else "Light")
                     if hasattr(self, 'switch_theme'):
                         if self.is_dark_mode: self.switch_theme.select()
@@ -1199,21 +1339,17 @@ rmdir /S /Q "{extract_path}"
                     
                     self.out_src_val = data.get("out_src", "English")
                     self.out_tgt_val = data.get("out_tgt", "Japanese")
-                    if self.out_src_val == self.out_tgt_val:
-                        self.out_src_val = "English"
-                        self.out_tgt_val = "Japanese"
                     if hasattr(self, 'src_lang_out'):
                         self.src_lang_out.set(self.out_src_val)
                         self.tgt_lang_out.set(self.out_tgt_val)
                         
                     self.in_src_val = data.get("in_src", "Japanese")
                     self.in_tgt_val = data.get("in_tgt", "English")
-                    if self.in_src_val == self.in_tgt_val:
-                        self.in_src_val = "Japanese"
-                        self.in_tgt_val = "English"
                     if hasattr(self, 'src_lang_in'):
                         self.src_lang_in.set(self.in_src_val)
                         self.tgt_lang_in.set(self.in_tgt_val)
+                    
+
                         
                     self.hk_out = data.get("hk_out", "F2")
                     self.hk_in = data.get("hk_in", "F3")
@@ -1247,6 +1383,7 @@ rmdir /S /Q "{extract_path}"
             "ai_device": self.ai_device_combo.get() if hasattr(self, 'ai_device_combo') else "GPU (NVIDIA)",
             "ui_lang": self.ui_lang_combo.get() if hasattr(self, 'ui_lang_combo') else "English",
             "theme_dark": self.is_dark_mode,
+            "whisper_model": getattr(self, 'whisper_model_val', "medium"),
             "enable_telemetry": self.enable_telemetry_var.get(),
             "enable_mute_sync": self.enable_mute_sync_var.get(),
             "silence_timeout": self.silence_timeout_val,
@@ -1305,7 +1442,12 @@ rmdir /S /Q "{extract_path}"
         self.lbl_engine.configure(text=self.get_t("engine_lbl"))
         self.lbl_device.configure(text=self.get_t("device_lbl"))
         self.lbl_device_info.configure(text=self.get_t("device_info"))
-        self.lbl_model_fixed_info.configure(text=self.get_t("model_fixed_info"))
+        if hasattr(self, 'lbl_model'):
+            self.lbl_model.configure(text=self.get_t("model_lbl"))
+            self.btn_clear_cache.configure(text=self.get_t("btn_clear_cache"))
+            self.update_model_info_label()
+            if hasattr(self, 'btn_nav_docs'):
+                self.btn_nav_docs.set_text(self.get_t("nav_docs") + " ↗")
         
         self.lbl_support.configure(text=self.get_t("support_msg"))
         self.lbl_osc_status_text.configure(text=self.get_t("osc_status"))
@@ -1404,7 +1546,7 @@ rmdir /S /Q "{extract_path}"
                     ]
                     self.gen_config = types.GenerateContentConfig(temperature=0.2, system_instruction=sys_instruct, safety_settings=safety_settings)
                 except Exception as e:
-                    self.root.after(0, lambda: self.log_out(f"API Initialization Error: {e}", "err"))
+                    self.root.after(0, lambda err=e: self.log_out(f"API Initialization Error: {err}", "err"))
                     if self.enable_telemetry_var.get():
                         try: sentry_sdk.capture_exception(e)
                         except: pass
@@ -1419,14 +1561,23 @@ rmdir /S /Q "{extract_path}"
             
             self.root.after(0, lambda: self.log_out(self.get_t("log_load_model").format(dev_type.upper()), "info"))
             try:
-                self.whisper_model = WhisperModel("medium", device=dev_type, compute_type=c_type)
+                if getattr(self, "whisper_model_val", "medium") == "medium":
+                    model_path = "medium"
+                else:
+                    model_dir = os.path.join(resource_path("models"), f"faster-whisper-{self.whisper_model_val}")
+                    model_path = model_dir if os.path.exists(model_dir) else self.whisper_model_val
+                
+                self.whisper_model = WhisperModel(model_path, device=dev_type, compute_type=c_type)
                 self.root.after(0, lambda: self.log_out(self.get_t("log_model_loaded"), "info"))
             except Exception as e:
                 err_str = str(e).lower()
                 if any(k in err_str for k in ["cuda", "cudnn", "cublas", "gpu", "library"]):
                     self.root.after(0, lambda: self.log_out(self.get_t("err_cuda_not_found"), "err"))
+                    self.root.after(0, lambda: messagebox.showerror("SyncVRC", self.get_t("alert_cuda")))
+                    self.root.after(0, lambda: self.select_frame("settings"))
                 else:
                     self.root.after(0, lambda err=e: self.log_out(f"Whisper Error: {err}", "err"))
+                    self.root.after(0, lambda err=e: messagebox.showerror("SyncVRC", self.get_t("alert_whisper_error").format(str(err))))
                     
                 if self.enable_telemetry_var.get():
                     try: sentry_sdk.capture_exception(e)
@@ -1440,7 +1591,43 @@ rmdir /S /Q "{extract_path}"
             self.root.after(0, lambda: self.start_btn_out.configure(state="normal"))
             self.root.after(0, lambda: self.start_btn_in.configure(state="normal"))
             
+        self._error_shown = False
         return True
+
+    def force_stop_all(self):
+        """Force stop both outgoing and incoming systems and reset UI."""
+        self.is_running_out = False
+        self.is_running_in = False
+        self.root.after(0, self.update_button_texts)
+        self.root.after(0, lambda: self.start_btn_out.configure(fg_color="#28a745", hover_color="#218838", state="normal"))
+        self.root.after(0, lambda: self.start_btn_in.configure(fg_color="#28a745", hover_color="#218838", state="normal"))
+        self.root.after(0, lambda: self.mic_combo_out.configure(state="normal"))
+        self.root.after(0, lambda: self.mic_combo_in.configure(state="normal"))
+        self.root.after(0, lambda: self.push_btn_out.configure(state="disabled"))
+        self.root.after(0, self.update_settings_state)
+
+    def handle_fatal_error(self, alert_key, log_msg, source_type, err=None, go_settings=False):
+        """Handle a fatal error: stop systems, log it, show popup alert (only once)."""
+        if getattr(self, '_error_shown', False):
+            return
+        self._error_shown = True
+        
+        log_func = self.log_out if source_type == "out" else self.log_in
+        self.root.after(0, lambda: log_func(log_msg, "err"))
+        
+        self.force_stop_all()
+        
+        alert_msg = self.get_t(alert_key)
+        if err and "{}" in alert_msg:
+            alert_msg = alert_msg.format(str(err))
+        
+        def _show_alert():
+            messagebox.showerror("SyncVRC", alert_msg)
+            if go_settings:
+                self.select_frame("settings")
+            self._error_shown = False
+        
+        self.root.after(100, _show_alert)
 
     def on_mode_change_out(self):
         if not self.is_running_out:
@@ -1454,6 +1641,10 @@ rmdir /S /Q "{extract_path}"
 
     def toggle_out_thread(self): 
         if not self.is_running_out:
+            if self.src_lang_out.get() == self.tgt_lang_out.get():
+                messagebox.showwarning("SyncVRC", self.get_t("warn_same_lang"))
+                return
+
             if str(self.api_key_entry.cget("state")) == "normal":
                 self.api_keys[self.trans_engine_val] = self.api_key_var.get().strip()
                 self.api_key_entry.configure(show="*", state="disabled", fg_color=("gray85", "gray25"))
@@ -1571,25 +1762,25 @@ rmdir /S /Q "{extract_path}"
             self.send_to_vrchat(f"{text}\n{translation}")
         except Exception as e:
             err_str = str(e).lower()
-            if any(k in err_str for k in ["429", "quota", "exhausted", "limit"]):
-                msg = self.get_t("err_api_limit")
-            elif "api key not valid" in err_str or "api_key" in err_str:
-                msg = self.get_t("err_api_invalid")
-            elif "400" in err_str or "invalid" in err_str:
-                # ถ้าเป็น 400 เรื่องอื่น ให้พ่น Error จริงออกมา จะได้รู้ว่าพังที่ไหน
-                msg = f"❌ API Request Error: {e}" 
-            else:
-                msg = f"❌ Error: {e}"
-                
-            if self.is_running_out: self.root.after(0, lambda: self.log_out(msg, "err"))
             self.osc_client.send_message("/chatbox/typing", False)
             
-            if self.enable_telemetry_var.get() and "api error" not in msg.lower() and "limit" not in msg.lower():
+            if any(k in err_str for k in ["429", "quota", "exhausted", "limit"]):
+                self.handle_fatal_error("alert_api_limit", self.get_t("err_api_limit"), "out", go_settings=True)
+            elif "api key not valid" in err_str or "api_key" in err_str:
+                self.handle_fatal_error("alert_api_invalid", self.get_t("err_api_invalid"), "out", go_settings=True)
+            else:
+                self.handle_fatal_error("alert_api_generic", f"❌ Error: {e}", "out", err=e)
+
+            if self.enable_telemetry_var.get() and "limit" not in err_str and "api key" not in err_str:
                 try: sentry_sdk.capture_exception(e)
                 except: pass
 
     def toggle_in_thread(self): 
         if not self.is_running_in:
+            if self.src_lang_in.get() == self.tgt_lang_in.get():
+                messagebox.showwarning("SyncVRC", self.get_t("warn_same_lang"))
+                return
+
             if str(self.api_key_entry.cget("state")) == "normal":
                 self.api_keys[self.trans_engine_val] = self.api_key_var.get().strip()
                 self.api_key_entry.configure(show="*", state="disabled", fg_color=("gray85", "gray25"))
@@ -1669,15 +1860,27 @@ rmdir /S /Q "{extract_path}"
                 if source_type == "out" and not self.is_running_out: return
                 if source_type == "in" and not self.is_running_in: return
 
-                segments, _ = self.whisper_model.transcribe(
-                    audio_np, 
+                # Check if VAD model file exists (may be missing in packaged builds)
+                vad_available = True
+                try:
+                    import faster_whisper
+                    vad_path = os.path.join(os.path.dirname(faster_whisper.__file__), "assets", "silero_vad_v6.onnx")
+                    if not os.path.exists(vad_path):
+                        vad_available = False
+                except Exception:
+                    vad_available = False
+
+                transcribe_kwargs = dict(
                     beam_size=self.beam_size_val, 
                     language=lang_code, 
                     initial_prompt=stt_prompt,
-                    vad_filter=True,
-                    vad_parameters=dict(min_silence_duration_ms=int(self.silence_timeout_val * 1000)),
-                    condition_on_previous_text=False 
+                    condition_on_previous_text=False
                 )
+                if vad_available:
+                    transcribe_kwargs["vad_filter"] = True
+                    transcribe_kwargs["vad_parameters"] = dict(min_silence_duration_ms=int(self.silence_timeout_val * 1000))
+
+                segments, _ = self.whisper_model.transcribe(audio_np, **transcribe_kwargs)
                 
                 valid_texts = []
                 for segment in segments:
@@ -1706,23 +1909,17 @@ rmdir /S /Q "{extract_path}"
 
         except Exception as e:
             err_str = str(e).lower()
-            if any(k in err_str for k in ["429", "quota", "exhausted", "limit"]):
-                msg = self.get_t("err_api_limit")
-            elif "api key not valid" in err_str or "api_key" in err_str:
-                msg = self.get_t("err_api_invalid")
-            elif "400" in err_str or "invalid" in err_str:
-                # ถ้าเป็น 400 เรื่องอื่น ให้พ่น Error จริงออกมา จะได้รู้ว่าพังที่ไหน
-                msg = f"❌ API Request Error: {e}" 
-            else:
-                msg = f"❌ Error: {e}"
-                
             if source_type == "out":
-                if self.is_running_out: self.root.after(0, lambda: self.log_out(msg, "err"))
                 self.osc_client.send_message("/chatbox/typing", False)
+            
+            if any(k in err_str for k in ["429", "quota", "exhausted", "limit"]):
+                self.handle_fatal_error("alert_api_limit", self.get_t("err_api_limit"), source_type, go_settings=True)
+            elif "api key not valid" in err_str or "api_key" in err_str:
+                self.handle_fatal_error("alert_api_invalid", self.get_t("err_api_invalid"), source_type, go_settings=True)
             else:
-                if self.is_running_in: self.root.after(0, lambda: self.log_in(msg, "err"))
+                self.handle_fatal_error("alert_api_generic", f"❌ Error: {e}", source_type, err=e)
 
-            if self.enable_telemetry_var.get() and "api error" not in msg.lower() and "limit" not in msg.lower():
+            if self.enable_telemetry_var.get() and "limit" not in err_str and "api key" not in err_str:
                 try: sentry_sdk.capture_exception(e)
                 except: pass
 
@@ -1738,8 +1935,209 @@ rmdir /S /Q "{extract_path}"
                 time.sleep(1.8)
 
     def get_whisper_lang_code(self, lang_name):
-        codes = {"English": "en", "Japanese": "ja", "Korean": "ko", "Chinese": "zh"}
+        codes = {"English": "en", "Japanese": "ja", "Korean": "ko", "Chinese": "zh", "Spanish": "es", "Russian": "ru", "French": "fr", "German": "de", "Portuguese": "pt", "Thai": "th"}
         return codes.get(lang_name, "en")
+
+
+    MODEL_SIZES = {
+        "tiny": "~75 MB",
+        "base": "~145 MB",
+        "small": "~484 MB",
+        "medium": "~1.5 GB",
+        "large-v3": "~3.1 GB"
+    }
+
+    def update_model_dropdown(self):
+        models = ["tiny", "base", "small", "medium", "large-v3"]
+        display_values = []
+        for m in models:
+            if m == "medium":
+                display_values.append(m + " (Downloaded)")
+            else:
+                model_dir = os.path.join(resource_path("models"), f"faster-whisper-{m}")
+                if os.path.exists(model_dir) and os.path.exists(os.path.join(model_dir, "model.bin")):
+                    display_values.append(m + " (Downloaded)")
+                else:
+                    display_values.append(m)
+        
+        self.whisper_model_combo.configure(values=display_values)
+        
+        # Set current value correctly
+        curr = getattr(self, "whisper_model_val", "medium")
+        for dv in display_values:
+            if dv.startswith(curr):
+                self.whisper_model_combo.set(dv)
+                break
+
+    def update_model_info_label(self):
+        """Update the model info label based on the currently selected whisper model."""
+        curr = getattr(self, "whisper_model_val", "medium")
+        info_key_map = {
+            "tiny": "model_info_tiny",
+            "base": "model_info_base",
+            "small": "model_info_small",
+            "medium": "model_info_medium",
+            "large-v3": "model_info_large"
+        }
+        key = info_key_map.get(curr, "model_info_medium")
+        if hasattr(self, 'lbl_model_info'):
+            self.lbl_model_info.configure(text=self.get_t(key))
+
+    def download_whisper_model(self, model_name, on_complete, on_cancel):
+        repo_id = f"Systran/faster-whisper-{model_name}"
+        save_dir = os.path.join(resource_path("models"), f"faster-whisper-{model_name}")
+        
+        dl_window = ctk.CTkToplevel(self.root)
+        dl_window.title(self.get_t("downloading_model_title"))
+        dl_window.geometry("500x180")
+        dl_window.transient(self.root)
+        dl_window.grab_set()
+        dl_window.protocol("WM_DELETE_WINDOW", lambda: self.cancel_download(dl_window, on_cancel))
+        
+        lbl_msg = ctk.CTkLabel(dl_window, text=self.get_t("downloading_model_msg").format(model_name, "0"), font=ctk.CTkFont(size=14, weight="bold"))
+        lbl_msg.pack(pady=(20, 10))
+        
+        progressbar = ctk.CTkProgressBar(dl_window, mode="determinate")
+        progressbar.pack(fill="x", padx=40)
+        progressbar.set(0)
+        
+        lbl_detail = ctk.CTkLabel(dl_window, text="Preparing...", font=ctk.CTkFont(size=11), text_color="gray")
+        lbl_detail.pack(pady=(5, 10))
+        
+        self.download_cancelled = False
+        
+        def run_download():
+            import urllib.request, json, shutil
+            try:
+                os.makedirs(save_dir, exist_ok=True)
+                url = f"https://huggingface.co/api/models/{repo_id}/tree/main"
+                req = urllib.request.Request(url, headers={'User-Agent': 'SyncVRC-App'})
+                with urllib.request.urlopen(req) as response:
+                    data = json.loads(response.read().decode('utf-8'))
+                
+                files_to_download = []
+                for f in data:
+                    if f['type'] == 'file' and f['path'] in ['config.json', 'model.bin', 'tokenizer.json', 'vocabulary.txt', 'vocabulary.json']:
+                        files_to_download.append(f)
+                
+                total_size = sum(f.get('size', 0) for f in files_to_download)
+                downloaded_size = 0
+                
+                for file_info in files_to_download:
+                    if self.download_cancelled:
+                        break
+                    
+                    file_name = file_info['path']
+                    file_url = f"https://huggingface.co/{repo_id}/resolve/main/{file_name}"
+                    file_path = os.path.join(save_dir, file_name)
+                    
+                    self.root.after(0, lambda name=file_name: lbl_detail.configure(text=f"Downloading {name}..."))
+                    
+                    req_file = urllib.request.Request(file_url, headers={'User-Agent': 'SyncVRC-App'})
+                    with urllib.request.urlopen(req_file) as response, open(file_path, 'wb') as out_file:
+                        chunk_size = 1024 * 64
+                        while True:
+                            if self.download_cancelled:
+                                break
+                            chunk = response.read(chunk_size)
+                            if not chunk:
+                                break
+                            out_file.write(chunk)
+                            downloaded_size += len(chunk)
+                            if total_size > 0:
+                                percent = (downloaded_size / total_size)
+                                percent_int = int(percent * 100)
+                                self.root.after(0, lambda p=percent, pint=percent_int: (
+                                    progressbar.set(p),
+                                    lbl_msg.configure(text=self.get_t("downloading_model_msg").format(model_name, str(pint)))
+                                ))
+                
+                if self.download_cancelled:
+                    shutil.rmtree(save_dir, ignore_errors=True)
+                else:
+                    self.root.after(0, dl_window.destroy)
+                    self.root.after(0, on_complete)
+                    self.root.after(0, self.update_model_dropdown)
+                    
+            except Exception as e:
+                self.root.after(0, lambda err=e: messagebox.showerror("Download Error", f"Failed to download model:\n{str(err)}"))
+                import shutil
+                shutil.rmtree(save_dir, ignore_errors=True)
+                self.root.after(0, dl_window.destroy)
+                self.root.after(0, on_cancel)
+                
+        import threading
+        threading.Thread(target=run_download, daemon=True).start()
+
+    def cancel_download(self, window, on_cancel):
+        self.download_cancelled = True
+        window.destroy()
+        on_cancel()
+
+    def on_model_change(self, value):
+        from tkinter import messagebox
+        import os
+        
+        # Strip the " (Downloaded)" if it exists
+        clean_val = value.replace(" (Downloaded)", "")
+        
+        if self.is_running_out or self.is_running_in:
+            messagebox.showwarning("SyncVRC", "Please stop Outgoing and Incoming before changing the model.")
+            self.update_model_dropdown()
+            return
+
+        if clean_val == "medium":
+            self.apply_model_change("medium")
+            self.update_model_dropdown()
+            self.update_model_info_label()
+            return
+
+        model_dir = os.path.join(resource_path("models"), f"faster-whisper-{clean_val}")
+        if not os.path.exists(model_dir) or not os.path.exists(os.path.join(model_dir, "model.bin")):
+            size_str = self.MODEL_SIZES.get(clean_val, "unknown")
+            msg = self.get_t("confirm_download_msg").format(clean_val, size_str)
+            if messagebox.askyesno(self.get_t("confirm_download_title"), msg):
+                self.download_whisper_model(clean_val, 
+                    on_complete=lambda: self.apply_model_change(clean_val),
+                    on_cancel=lambda: self.update_model_dropdown()
+                )
+            else:
+                self.update_model_dropdown()
+        else:
+            self.apply_model_change(clean_val)
+            self.update_model_dropdown()
+        self.update_model_info_label()
+
+    def apply_model_change(self, value):
+        self.whisper_model_val = value
+        if hasattr(self, 'whisper_model'):
+            del self.whisper_model
+        self.save_all_settings()
+        self.update_model_info_label()
+
+    def clear_model_cache(self):
+        from tkinter import messagebox
+        import os, shutil
+        
+        if not messagebox.askyesno(self.get_t("confirm_clear_title"), self.get_t("confirm_clear_msg")):
+            return
+            
+        models_dir = resource_path("models")
+        if not os.path.exists(models_dir):
+            messagebox.showinfo("SyncVRC", "No unused models to clear.")
+            return
+            
+        cleared = False
+        for item in os.listdir(models_dir):
+            if item.startswith("faster-whisper-") and item != f"faster-whisper-{self.whisper_model_val}":
+                shutil.rmtree(os.path.join(models_dir, item), ignore_errors=True)
+                cleared = True
+                
+        if cleared:
+            messagebox.showinfo("SyncVRC", self.get_t("cache_cleared_msg"))
+            self.update_model_dropdown()
+        else:
+            messagebox.showinfo("SyncVRC", "No unused models to clear.")
 
 if __name__ == "__main__":
     root = ctk.CTk()

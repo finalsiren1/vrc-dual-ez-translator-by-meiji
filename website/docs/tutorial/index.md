@@ -21,6 +21,12 @@ SyncVRC is a real-time voice translation tool designed specifically for VRChat. 
 * 🔒 **Absolute Privacy**: Stores API keys strictly on your local machine (`config.json`) and communicates directly with official API endpoints. No voice data or keys are collected or stored remotely.
 * ⚙️ **Pro-Level Audio Control**: Provides granular adjustments for AI accuracy (Beam Size), silence timeouts, and maximum recording durations to match your personal speaking cadence.
 
+### ⚠️ Important Notice: API Key Required
+
+To be completely transparent, **SyncVRC cannot function without an API Key** for the translation services (like Gemini, DeepL, or OpenAI). You must obtain your own API key to use this software. 
+
+We highly recommend using a **Paid API Key** if possible. Free tier keys often have strict rate limits which will cause translations to pause, skip, or fail during continuous conversation, leading to a frustrating experience. For details on how to get an API key, please visit: [AI Providers & API Setup](https://finalsiren1.github.io/SyncVRC/ai-providers)
+
 ## Get Started
 
 ### How to Install
